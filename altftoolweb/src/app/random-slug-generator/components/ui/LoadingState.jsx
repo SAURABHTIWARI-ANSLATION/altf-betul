@@ -1,28 +1,18 @@
-import React from 'react';
+import React from 'react'
 
-export default function LoadingState({ message = 'Orchestrating magic...' }) {
+export default function LoadingState({ message = 'Finding your destination...' }) {
   return (
-    <div className="fixed inset-0 bg-white/80 backdrop-blur-md z-[100] flex flex-col items-center justify-center transition-all duration-500">
-      <div className="relative flex items-center justify-center">
-        {/* Outer glowing rings */}
-        <div className="absolute w-32 h-32 bg-indigo-400/20 rounded-full animate-ping"></div>
-        <div className="absolute w-24 h-24 bg-purple-400/20 rounded-full animate-pulse"></div>
-        
-        {/* Core spinner */}
-        <div className="relative w-16 h-16 bg-white rounded-2xl shadow-xl flex items-center justify-center overflow-hidden border border-gray-100">
-          <div className="w-8 h-8 border-4 border-indigo-100 rounded-full absolute"></div>
-          <div className="w-8 h-8 border-4 border-indigo-600 rounded-full border-t-transparent animate-spin absolute"></div>
+    <div style={{ position: 'fixed', inset: 0, background: 'color-mix(in srgb, var(--background) 88%, transparent)', backdropFilter: 'blur(16px)', zIndex: 100, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+      <div style={{ position: 'relative', width: '72px', height: '72px', marginBottom: '1.5rem' }}>
+        <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', border: '4px solid var(--anslation-ds-primary-soft)' }} />
+        <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', border: '4px solid transparent', borderTopColor: 'var(--primary)', animation: 'spin 0.8s linear infinite' }} />
+        <div style={{ position: 'absolute', inset: '10px', borderRadius: '50%', background: 'var(--card)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: 'var(--anslation-ds-shadow-sm)', fontSize: '1.25rem' }}>
+          🎲
         </div>
       </div>
-      
-      <div className="mt-8 text-center space-y-2">
-        <h2 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 animate-pulse">
-          {message}
-        </h2>
-        <p className="text-sm font-medium text-gray-500 tracking-wide">
-          Securing the best destination
-        </p>
-      </div>
+      <h2 style={{ fontSize: '1.125rem', fontWeight: 700, color: 'var(--foreground)', marginBottom: '0.375rem' }}>{message}</h2>
+      <p style={{ fontSize: '0.875rem', color: 'var(--muted-foreground)' }}>Securing your destination…</p>
+      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
     </div>
-  );
+  )
 }

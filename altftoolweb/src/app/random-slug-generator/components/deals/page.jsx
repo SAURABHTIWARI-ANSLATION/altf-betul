@@ -1,47 +1,67 @@
-import React from 'react';
+"use client"
+import React, { useState, useEffect } from 'react'
 
-export default function DealsPage() {
+function useTimer() {
+  const [secs, setSecs] = useState(5400) // 1h 30m demo
+  useEffect(() => {
+    const id = setInterval(() => setSecs(s => (s > 0 ? s - 1 : 0)), 1000)
+    return () => clearInterval(id)
+  }, [])
+  const h = String(Math.floor(secs / 3600)).padStart(2, '0')
+  const m = String(Math.floor((secs % 3600) / 60)).padStart(2, '0')
+  const s = String(secs % 60).padStart(2, '0')
+  return `${h}:${m}:${s}`
+}
+
+export default function DealsPage({ item }) {
+  const timer = useTimer()
+  if (!item) return null
   return (
-    <div className="bg-white/80 backdrop-blur-xl rounded-[2rem] border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-8">
-      <div className="flex items-center justify-between mb-8">
-        <div>
-          <h2 className="text-2xl font-bold text-gray-900 tracking-tight">Active Deals</h2>
-          <p className="text-sm text-gray-500 mt-1 font-medium">Manage promotional campaigns and discounts.</p>
+    <div className="card" style={{ borderRadius: 'var(--anslation-ds-radius-xl)', overflow: 'hidden', boxShadow: 'var(--anslation-ds-shadow-md)' }}>
+      <div style={{ padding: '1.5rem' }}>
+        {/* Store + rating */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
+          <span style={{ fontWeight: 700, fontSize: '0.875rem', color: 'var(--foreground)' }}>{item.store}</span>
+          <span className="rp-deal-savings-badge" style={{ background: 'var(--anslation-ds-success)', color: '#fff' }}>★ {item.rating}</span>
         </div>
-        <button className="px-5 py-2.5 bg-indigo-600 text-white text-sm font-semibold rounded-xl shadow-md hover:bg-indigo-700 hover:shadow-lg transition-all duration-300">
-          + Add New Deal
+
+        {/* Product block */}
+        <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', marginBottom: '1.25rem' }}>
+          <div className="rp-deal-product-image" style={{ width: '90px', height: '90px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.5rem' }}>
+            🛒
+          </div>
+          <div>
+            <h3 style={{ fontWeight: 700, fontSize: '1.125rem', color: 'var(--foreground)', marginBottom: '0.375rem', lineHeight: 1.2 }}>{item.title}</h3>
+            <div className="rp-deal-original-price">{item.originalPrice}</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.25rem' }}>
+              <span className="rp-deal-sale-price">{item.salePrice}</span>
+              <span className="rp-deal-savings-badge">{item.discount} OFF</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Trust pills */}
+        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
+          {['📦 Free Delivery', '✅ Verified', '🔒 Secure'].map(t => (
+            <span key={t} className="rp-deal-trust-pill">{t}</span>
+          ))}
+        </div>
+
+        {/* Timer */}
+        <div className="rp-deal-timer-box">
+          ⏳ Deal ends in: <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 800 }}>{timer}</span>
+        </div>
+
+        {/* CTA */}
+        <a href={item.url} target="_blank" rel="noopener noreferrer"
+          className="btn btn-primary"
+          style={{ width: '100%', minHeight: '52px', fontSize: '1rem', fontWeight: 700, justifyContent: 'center', marginTop: '1rem', borderRadius: 'var(--anslation-ds-radius-lg)' }}>
+          Get This Deal →
+        </a>
+        <button className="btn btn-secondary" style={{ width: '100%', minHeight: '44px', marginTop: '0.5rem', justifyContent: 'center' }}>
+          🔖 Save Deal
         </button>
       </div>
-      
-      <div className="grid gap-6 md:grid-cols-2">
-        {/* Deal Card 1 */}
-        <div className="group p-6 bg-gradient-to-br from-indigo-50/50 to-purple-50/50 rounded-2xl border border-indigo-100/50 hover:border-indigo-200 transition-all duration-300">
-          <div className="flex justify-between items-start mb-4">
-            <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-sm text-indigo-600">
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-            </div>
-            <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">Active</span>
-          </div>
-          <h4 className="font-bold text-gray-900 text-lg mb-1">Flash Sale Electronics</h4>
-          <p className="text-sm text-gray-500 font-medium">Ends in 24 hours</p>
-        </div>
-
-        {/* Deal Card 2 */}
-        <div className="group p-6 bg-gradient-to-br from-blue-50/50 to-cyan-50/50 rounded-2xl border border-blue-100/50 hover:border-blue-200 transition-all duration-300">
-          <div className="flex justify-between items-start mb-4">
-            <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-sm text-blue-600">
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">Active</span>
-          </div>
-          <h4 className="font-bold text-gray-900 text-lg mb-1">Weekend Getaway</h4>
-          <p className="text-sm text-gray-500 font-medium">Travel category exclusive</p>
-        </div>
-      </div>
     </div>
-  );
+  )
 }
