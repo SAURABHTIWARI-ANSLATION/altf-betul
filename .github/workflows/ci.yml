@@ -1,0 +1,173 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: "42 2 * * *"
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  CI: true
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  NEXT_TELEMETRY_DISABLED: 1
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            altftoolweb/package-lock.json
+            altftoolwebadmin/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Check deployment environment readiness
+        run: npm run env:readiness
+
+      - name: Verify Firebase Admin write checker wiring
+        run: npm run firebase:admin-write-check:dry-run
+
+      - name: Validate full route surface
+        run: npm run validate:full
+
+      - name: Verify live Firebase data
+        run: npm run firebase:live-check
+
+      - name: Verify live Firebase renders on public pages
+        run: npm run test:firebase-public-pages
+
+      - name: Validate every microtool route
+        if: github.event_name != 'pull_request'
+        run: ALTFT_PLAYWRIGHT_WEB_SERVER=production ALTFT_PLAYWRIGHT_ADMIN_SERVER=dev npm run test:tools:all
+
+      - name: Verify security headers
+        run: npm run test:security
+
+      - name: Run Lighthouse quality gate
+        run: npm run test:lighthouse
+
+      - name: Upload Playwright artifacts
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: verify-playwright-artifacts
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+
+  firebase-emulator:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            altftoolweb/package-lock.json
+            altftoolwebadmin/package-lock.json
+
+      - name: Setup Java for Firebase Emulator
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install admin rules-test dependencies
+        run: npm --prefix altftoolwebadmin ci
+
+      - name: Verify Firebase Admin write checker emulator branch
+        run: npm run test:firebase-admin-write-check
+
+      - name: Verify Firebase security rules against emulators
+        run: npm run test:firebase-rules:emulator
+
+      - name: Verify admin CRUD paths against Firestore Emulator
+        run: npm run test:admin-crud:emulator
+
+      - name: Verify admin-to-web sync against Firestore Emulator
+        run: npm run test:admin-web-sync:emulator
+
+  visual-regression:
+    runs-on: macos-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            altftoolweb/package-lock.json
+            altftoolwebadmin/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browser
+        run: npx playwright install chromium
+
+      - name: Run visual regression
+        run: npm run test:visual
+
+      - name: Upload visual artifacts
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-regression-artifacts
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+
+  deploy-production:
+    name: Deploy production
+    needs:
+      - verify
+      - firebase-emulator
+      - visual-regression
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/vercel-deploy.yml
+    with:
+      target: all
+    secrets: inherit

@@ -1,0 +1,98 @@
+[
+  {
+    "id": "cat_romance",
+    "name": "Romance",
+    "slug": "romance",
+    "description": "Love stories and relationships",
+    "coverImage": "/wattpad/trending/Behind-The-Limelight.jpg",
+    "createdAt": "2025-01-01"
+  },
+  {
+    "id": "cat_thriller",
+    "name": "Thriller",
+    "slug": "thriller",
+    "description": "Suspense and high-stakes drama",
+    "coverImage": "/wattpad/trending/Bite-Me.jpg",
+    "createdAt": "2025-01-01"
+  },
+  {
+    "id": "cat_fantasy",
+    "name": "Fantasy",
+    "slug": "fantasy",
+    "description": "Magic, mythical worlds, and adventures",
+    "coverImage": "/wattpad/trending/Forgotten-Wolf.jpg",
+    "createdAt": "2025-01-01"
+  },
+  {
+    "id": "cat_fanfiction",
+    "name": "Fanfiction",
+    "slug": "fanfiction",
+    "description": "Stories inspired by existing characters",
+    "coverImage": "/wattpad/trending/Costantino.jpg",
+    "createdAt": "2025-01-01"
+  },
+  {
+    "id": "cat_new_adult",
+    "name": "New Adult",
+    "slug": "new-adult",
+    "description": "Young adult stories with mature themes",
+    "coverImage": "/wattpad/trending/Tempting.jpg",
+    "createdAt": "2025-01-01"
+  },
+  {
+    "id": "cat_lgbtq",
+    "name": "LGBTQ+",
+    "slug": "lgbtq",
+    "description": "Stories centered on LGBTQ+ characters",
+    "coverImage": "/wattpad/trending/Lilah.jpg",
+    "createdAt": "2025-01-01"
+  },
+  {
+    "id": "cat_horror",
+    "name": "Horror",
+    "slug": "horror",
+    "description": "Scary and supernatural stories",
+    "coverImage": "/wattpad/trending/Bite-Me.jpg",
+    "createdAt": "2025-01-01"
+  },
+  {
+    "id": "cat_historical_fiction",
+    "name": "Historical Fiction",
+    "slug": "historical-fiction",
+    "description": "Stories set in the past",
+    "coverImage": "/wattpad/trending/Sidelined-2.jpg",
+    "createdAt": "2025-01-01"
+  },
+  {
+    "id": "cat_science_fiction",
+    "name": "Science Fiction",
+    "slug": "science-fiction",
+    "description": "Futuristic and science-based stories",
+    "coverImage": "/wattpad/trending/Forgotten-Wolf.jpg",
+    "createdAt": "2025-01-01"
+  },
+  {
+    "id": "cat_mystery",
+    "name": "Mystery",
+    "slug": "mystery",
+    "description": "Detective and investigation stories",
+    "coverImage": "/wattpad/trending/Tempting.jpg",
+    "createdAt": "2025-01-01"
+  },
+  {
+    "id": "cat_poetry",
+    "name": "Poetry",
+    "slug": "poetry",
+    "description": "Creative poems and verses",
+    "coverImage": "/wattpad/trending/Lilah.jpg",
+    "createdAt": "2025-01-01"
+  },
+  {
+    "id": "cat_adventure",
+    "name": "Adventure",
+    "slug": "adventure",
+    "description": "Exciting journeys and explorations",
+    "coverImage": "/wattpad/trending/Sidelined-2.jpg",
+    "createdAt": "2025-01-01"
+  }
+]

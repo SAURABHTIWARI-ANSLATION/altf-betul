@@ -1,0 +1,20 @@
+*,
+*::before,
+*::after {
+  animation-delay: 0s !important;
+  animation-duration: 0s !important;
+  scroll-behavior: auto !important;
+  transition-delay: 0s !important;
+  transition-duration: 0s !important;
+}
+
+[data-nextjs-toast],
+[data-nextjs-dialog],
+nextjs-portal,
+.nextjs-toast,
+.nprogress-busy,
+#nprogress,
+iframe,
+video {
+  visibility: hidden !important;
+}

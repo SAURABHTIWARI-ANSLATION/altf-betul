@@ -1,0 +1,637 @@
+/* CKEditor article content */
+
+.ckeditor-content {
+  color: var(--foreground);
+  font-size: 1rem;
+  line-height: 1.82;
+  overflow-x: hidden;
+  overflow-wrap: anywhere;
+}
+
+.blog-article-content {
+  max-width: none;
+}
+
+.ckeditor-content > *:first-child {
+  margin-top: 0;
+}
+
+.ckeditor-content > * + * {
+  margin-top: 1.05rem;
+}
+
+.ckeditor-content .text-tiny {
+  font-size: 0.7em;
+}
+
+.ckeditor-content .text-small {
+  font-size: 0.85em;
+}
+
+.ckeditor-content .text-big {
+  font-size: 1.4em;
+}
+
+.ckeditor-content .text-huge {
+  font-size: 1.8em;
+}
+
+.ckeditor-content p {
+  color: var(--muted-foreground);
+}
+
+.ckeditor-content h1,
+.ckeditor-content h2,
+.ckeditor-content h3,
+.ckeditor-content h4 {
+  color: var(--foreground);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.18;
+  scroll-margin-top: 6.5rem;
+}
+
+.ckeditor-content h1 {
+  font-size: clamp(1.85rem, 3vw, 2.5rem);
+}
+
+.ckeditor-content h2 {
+  font-size: clamp(1.45rem, 2.3vw, 2rem);
+}
+
+.ckeditor-content h3 {
+  font-size: clamp(1.2rem, 1.8vw, 1.45rem);
+}
+
+.ckeditor-content h4 {
+  font-size: 1.05rem;
+}
+
+.ckeditor-content h2:not(:first-child) {
+  border-top: 1px solid var(--border);
+  margin-top: 2rem;
+  padding-top: 1.6rem;
+}
+
+.ckeditor-content h3,
+.ckeditor-content h4 {
+  margin-top: 1.65rem;
+}
+
+.ckeditor-content .blog-copy-heading {
+  position: relative;
+}
+
+.ckeditor-content .blog-heading-copy {
+  display: inline-flex;
+  width: 1.55rem;
+  height: 1.55rem;
+  margin-left: 0.45rem;
+  vertical-align: 0.12em;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--card);
+  color: var(--muted-foreground);
+  font-size: 0.85rem;
+  font-weight: 800;
+  line-height: 1;
+  opacity: 0;
+  transition: opacity 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.ckeditor-content .blog-copy-heading:hover .blog-heading-copy,
+.ckeditor-content .blog-heading-copy:focus-visible {
+  opacity: 1;
+}
+
+.ckeditor-content .blog-heading-copy:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.ckeditor-content ul,
+.ckeditor-content ol {
+  color: var(--muted-foreground);
+  padding-left: 1.35rem;
+}
+
+.ckeditor-content ul {
+  list-style: disc;
+}
+
+.ckeditor-content ol {
+  list-style: decimal;
+}
+
+.ckeditor-content li + li {
+  margin-top: 0.45rem;
+}
+
+.ckeditor-content li::marker {
+  color: var(--primary);
+}
+
+.ckeditor-content img {
+  height: auto;
+  max-width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--anslation-ds-radius);
+  margin: 1.75rem auto;
+}
+
+.ckeditor-media {
+  display: block;
+  max-width: 100%;
+  margin: 1rem auto;
+}
+
+.ckeditor-content blockquote {
+  border-left: 3px solid var(--primary);
+  border-radius: 0 var(--anslation-ds-radius) var(--anslation-ds-radius) 0;
+  background: var(--muted);
+  color: var(--foreground);
+  margin: 1.5rem 0;
+  padding: 1rem 1.1rem;
+}
+
+.ckeditor-content blockquote p {
+  color: var(--foreground);
+  margin: 0;
+}
+
+.ckeditor-content p a:not(.CTA_CK),
+.ckeditor-content li a:not(.CTA_CK),
+.ckeditor-content span a:not(.CTA_CK) {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.ckeditor-content p a:hover,
+.ckeditor-content li a:hover,
+.ckeditor-content span a:hover,
+.ckeditor-content a:hover {
+  color: var(--primary-active);
+}
+
+.ckeditor-content .auto-internal-link {
+  border-radius: 0.35rem;
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
+  padding: 0.05rem 0.22rem;
+  text-decoration-thickness: 1px;
+}
+
+.ckeditor-content .video-wrapper {
+  aspect-ratio: 16 / 9;
+  margin: 1.75rem 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--anslation-ds-radius);
+  background: var(--muted);
+}
+
+.ckeditor-content .video-wrapper iframe {
+  width: 100%;
+  height: 100%;
+}
+
+.ckeditor-content table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin: 1.75rem 0;
+  color: var(--foreground);
+  background-color: var(--background);
+  font-size: 0.95rem;
+}
+
+.ckeditor-content th,
+.ckeditor-content td {
+  min-width: 160px;
+  border: 1px solid var(--border);
+  padding: 0.75rem 0.85rem;
+  text-align: left;
+  color: var(--foreground);
+  background-color: var(--background);
+  vertical-align: top;
+}
+
+.ckeditor-content th {
+  background-color: var(--muted);
+  font-weight: 700;
+}
+
+.ckeditor-content tr:nth-child(even) td {
+  background-color: var(--muted);
+}
+
+.ckeditor-content tr:hover td {
+  background-color: var(--card);
+}
+
+.ckeditor-content .FAQ_HEADING {
+  margin-top: 2rem;
+}
+
+.ckeditor-content .FAQ_WRAPPER {
+  display: grid;
+  gap: 0.75rem;
+  margin: 1.25rem 0 1.75rem;
+}
+
+.ckeditor-content .FAQ_ITEM {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--anslation-ds-radius);
+  background: var(--background);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ckeditor-content .FAQ_ITEM.FAQ_OPEN {
+  border-color: color-mix(in srgb, var(--primary) 38%, var(--border));
+  box-shadow: var(--anslation-ds-shadow-sm);
+}
+
+.ckeditor-content .FAQ_Q {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+  border: 0;
+  background: transparent;
+  color: var(--foreground);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.98rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.35;
+  text-align: left;
+}
+
+.ckeditor-content .FAQ_Q:hover {
+  color: var(--primary);
+}
+
+.ckeditor-content .FAQ_ICON {
+  display: inline-flex;
+  width: 1.35rem;
+  height: 1.35rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--muted);
+  color: var(--primary);
+  font-size: 0.95rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.ckeditor-content .FAQ_ICON::before {
+  content: "+";
+}
+
+.ckeditor-content .FAQ_ITEM.FAQ_OPEN .FAQ_ICON::before {
+  content: "-";
+}
+
+.ckeditor-content .FAQ_A {
+  border-top: 1px solid var(--border);
+  background: var(--card);
+  padding: 0.9rem 1.1rem 1.05rem;
+}
+
+.ckeditor-content .FAQ_ITEM:not(.FAQ_OPEN) .FAQ_A {
+  display: none;
+}
+
+.ckeditor-content .FAQ_A p {
+  margin: 0;
+  color: var(--muted-foreground);
+}
+
+.ckeditor-content .FAQ_A p + p {
+  margin-top: 0.75rem;
+}
+
+.ckeditor-content .BLOG_CHECKLIST {
+  display: grid;
+  gap: 0.7rem;
+  padding-left: 0;
+  list-style: none;
+}
+
+.ckeditor-content .BLOG_CHECKLIST li {
+  position: relative;
+  padding: 0.85rem 0.95rem 0.85rem 2.6rem;
+  border: 1px solid var(--border);
+  border-radius: var(--anslation-ds-radius);
+  background: var(--background);
+}
+
+.ckeditor-content .BLOG_CHECKLIST li::before {
+  content: "";
+  position: absolute;
+  top: 1.05rem;
+  left: 1rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 999px;
+  background: var(--primary);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 12%, transparent);
+}
+
+.ckeditor-content .BLOG_STEPS {
+  display: grid;
+  gap: 0.85rem;
+  padding-left: 0;
+  list-style: none;
+  counter-reset: blog-step;
+}
+
+.ckeditor-content .BLOG_STEPS li {
+  position: relative;
+  min-height: 3.4rem;
+  padding: 0.85rem 0.95rem 0.85rem 3.25rem;
+  border: 1px solid var(--border);
+  border-radius: var(--anslation-ds-radius);
+  background: var(--background);
+  counter-increment: blog-step;
+}
+
+.ckeditor-content .BLOG_STEPS li::before {
+  content: counter(blog-step);
+  position: absolute;
+  top: 0.9rem;
+  left: 0.95rem;
+  display: inline-flex;
+  width: 1.55rem;
+  height: 1.55rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.ckeditor-content .BLOG_PROS_CONS {
+  display: grid;
+  gap: 0.9rem;
+  margin: 1.5rem 0;
+}
+
+.ckeditor-content .BLOG_PROS_CONS > div {
+  border: 1px solid var(--border);
+  border-radius: var(--anslation-ds-radius);
+  background: var(--background);
+  padding: 1rem;
+}
+
+.ckeditor-content .BLOG_PROS_CONS h3 {
+  margin-top: 0;
+  font-size: 1rem;
+}
+
+.ckeditor-content .BLOG_PROS_CONS ul {
+  margin-bottom: 0;
+}
+
+.ckeditor-content .BLOG_COMPARE {
+  border-radius: var(--anslation-ds-radius);
+  box-shadow: var(--anslation-ds-shadow-sm);
+}
+
+.ckeditor-content .BLOG_CALLOUT,
+.ckeditor-content .BLOG_TOOL_CTA {
+  border: 1px solid color-mix(in srgb, var(--primary) 26%, var(--border));
+  border-radius: var(--anslation-ds-radius);
+  background: color-mix(in srgb, var(--primary) 8%, var(--card));
+  margin: 1.5rem 0;
+  padding: 1rem 1.1rem;
+}
+
+.ckeditor-content .BLOG_CALLOUT strong,
+.ckeditor-content .BLOG_TOOL_CTA strong {
+  display: block;
+  color: var(--foreground);
+  font-size: 0.95rem;
+  margin-bottom: 0.35rem;
+}
+
+.ckeditor-content .BLOG_CALLOUT p,
+.ckeditor-content .BLOG_TOOL_CTA p {
+  margin: 0;
+}
+
+.ckeditor-content .BLOG_CALLOUT_REFRESH {
+  border-color: color-mix(in srgb, var(--primary) 34%, var(--border));
+  background: color-mix(in srgb, var(--primary) 12%, var(--card));
+}
+
+.ckeditor-content .BLOG_TOOL_CTA {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.ckeditor-content .BLOG_TOOL_CTA a {
+  display: inline-flex;
+  min-height: 2.45rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: var(--primary);
+  color: var(--primary-foreground) !important;
+  padding: 0.65rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+@media (min-width: 760px) {
+  .ckeditor-content .BLOG_PROS_CONS {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .ckeditor-content .BLOG_TOOL_CTA {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .ckeditor-content .BLOG_TOOL_CTA a {
+    width: 100%;
+  }
+}
+
+
+/* Wrapper */
+.CTA_CK_BANNER {
+  margin: 24px 0;
+  text-align: center; /* 👈 handles centering now */
+}
+
+/* Base CTA */
+.CTA_CK {
+  display: inline-flex; /* 👈 key change */
+  align-items: center;
+  gap: 12px;
+
+  width: auto;          /* 👈 remove full width */
+  max-width: none;      /* 👈 remove constraint */
+  margin: 0;            /* 👈 no centering hack */
+
+  padding: 16px 22px;
+  border-radius: 14px;
+
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+
+  transition: all 0.25s ease;
+}
+
+/* Icon */
+.CTA_ICON {
+  font-size: 20px;
+}
+
+
+
+/* ========================= */
+/* 🔵 PRIMARY (Default Blue) */
+/* ========================= */
+.CTA_PRIMARY {
+  background: #2563eb;
+  color: #ffffff !important;
+}
+
+.CTA_PRIMARY:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+/* ========================= */
+/* ⚪ SECONDARY (Outline) */
+/* ========================= */
+.CTA_SECONDARY {
+  border: 2px solid #2563eb;
+  color: #2563eb;
+  background: transparent;
+}
+
+.CTA_SECONDARY:hover {
+  background: #2563eb;
+  color: #fff !important;
+}
+
+
+/* ========================= */
+/* 🔥 GRADIENT (High CTR) */
+/* ========================= */
+.CTA_GRADIENT {
+  background: linear-gradient(90deg, #ff7a18, #ff3d00);
+  color: #ffffff !important;
+}
+
+.CTA_GRADIENT:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+/* ========================= */
+/* 🟢 SUCCESS (Green) */
+/* ========================= */
+.CTA_SUCCESS {
+  background: #16a34a;
+  color: #ffffff !important;
+}
+
+.CTA_SUCCESS:hover {
+  background: #15803d;
+}
+
+/* ========================= */
+/* 🟡 WARNING (Attention) */
+/* ========================= */
+.CTA_WARNING {
+  background: #f59e0b;
+  color: #ffffff !important;
+}
+
+.CTA_WARNING:hover {
+  background: #d97706;
+}
+
+/* ========================= */
+/* 🔴 DANGER (Urgent CTA) */
+/* ========================= */
+.CTA_DANGER {
+  background: #dc2626;
+  color: #ffffff !important;
+}
+
+.CTA_DANGER:hover {
+  background: #b91c1c;
+}
+
+/* ========================= */
+/* 🧊 GLASS (Modern UI) */
+/* ========================= */
+.CTA_GLASS {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  color: #111 !important;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.CTA_GLASS:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ========================= */
+/* 🎯 CENTERED STYLE */
+/* ========================= */
+.CTA_CENTER {
+  justify-content: center;
+  text-align: center;
+}
+
+/* ========================= */
+/* 📱 MOBILE OPTIMIZATION */
+/* ========================= */
+@media (max-width: 640px) {
+  .CTA_CK {
+    font-size: 15px;
+    padding: 14px 18px;
+  }
+}
+
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  overflow: hidden;
+  margin: 16px 0;
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
