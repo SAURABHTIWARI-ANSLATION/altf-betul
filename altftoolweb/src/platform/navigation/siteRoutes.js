@@ -125,14 +125,24 @@ export const LEGAL_ROUTE_LINKS = [
   SITE_ROUTES.cookie,
 ];
 
-const HIDDEN_PUBLIC_SHELL_PREFIXES = ["/search-eng"];
+const HIDDEN_PUBLIC_SHELL_PREFIXES = ["/search-eng", "/random-slug-generator/quizs"];
 const HIDDEN_PUBLIC_SHELL_PATTERNS = [];
+const HIDDEN_PUBLIC_SHELL_FOOTER_PREFIXES = ["/search-eng"];
+const HIDDEN_PUBLIC_SHELL_FOOTER_PATTERNS = [];
 
 export function isPublicShellHidden(pathname = "") {
   return (
     HIDDEN_PUBLIC_SHELL_PREFIXES.some(
       (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
     ) || HIDDEN_PUBLIC_SHELL_PATTERNS.some((pattern) => pattern.test(pathname))
+  );
+}
+
+export function isPublicShellFooterHidden(pathname = "") {
+  return (
+    HIDDEN_PUBLIC_SHELL_FOOTER_PREFIXES.some(
+      (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
+    ) || HIDDEN_PUBLIC_SHELL_FOOTER_PATTERNS.some((pattern) => pattern.test(pathname))
   );
 }
 
