@@ -8,7 +8,7 @@ import EmptyState from './components/ui/EmptyState'
 import CouponsPage from './components/coupons/page'
 import ViralPage from './components/viral-page/pages'
 import DealsPage from './components/deals/page'
-import SoftLandingPage from './components/softlanding-page/pages'
+import MaisonLanding from './components/softlanding-page/MaisonLanding'
 import SubscriptionPage from './components/subscription/page'
 import QuizPage from './components/quizs/pages'
 import SpinsWinsPage from './components/spins-wins/spins-wins'
@@ -20,7 +20,7 @@ const COMPONENT_MAP = {
   coupons:                    CouponsPage,
   viralPages:                 ViralPage,
   deals:                      DealsPage,
-  softEngagementLandingPages: SoftLandingPage,
+  softEngagementLandingPages: MaisonLanding,
   subscriptionOffers:         SubscriptionPage,
   quizPages:                  QuizPage,
   spinAndWin:                 SpinsWinsPage,
@@ -51,6 +51,11 @@ export default function RandomPagesHub() {
     setLoading(true)
     setError(null)
     setTimeout(() => {
+      if (catKey === 'softEngagementLandingPages') {
+        window.location.href = '/random-slug-generator/softlanding-page'
+        setLoading(false)
+        return
+      }
       const { error: err, item } = getRandomItem(catKey, randomPagesConfig)
       if (err || !item) { setError(err || 'No items.'); setLoading(false); return }
       const errMsg = safeRedirect(item.url, true)
