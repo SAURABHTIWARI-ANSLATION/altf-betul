@@ -1,46 +1,125 @@
-"use client"
-import React from 'react'
+ "use client"
 
-export default function ViralPage({ item }) {
-  if (!item) return null
+// import Hero from './Hero.jsx';
+// import TrendingMysteries from './TrendingMysteries.jsx';
+// import FactsGrid from './FactsGrid.jsx';
+// import ShortFormShowcase from './ShortformShowcase.jsx';
+// import PsychologicalHooks from './PhyscologicalHooks.jsx';
+// import CommunityDiscussion from './CommunityDiscussion.jsx';
+// import Footer from './Footer.jsx';
+
+// export default function ViralPage() {
+  
+//   return (
+//     <div className="bg-black text-white antialiased selection:bg-emerald-500/30 selection:text-emerald-200">
+//       <Hero />
+//       <TrendingMysteries />
+//       <FactsGrid />
+//       <ShortFormShowcase />
+//       <PsychologicalHooks />
+//       <CommunityDiscussion />
+//       <Footer />
+//     </div>
+//   );
+// }
+
+import { useState, useEffect } from 'react';
+import Hero from './Hero.jsx';
+import TrendingMysteries from './TrendingMysteries.jsx';
+import FactsGrid from './FactsGrid.jsx';
+import ShortFormShowcase from './ShortFormShowcase.jsx';
+import PsychologicalHooks from './PsychologicalHooks.jsx';
+import CommunityDiscussion from './CommunityDiscussion.jsx';
+import Footer from './Footer.jsx';
+import EmailGate from './EmailGate.jsx';
+
+export default function MysteryPlatform() {
+  const [viewCount, setViewCount] = useState(0);
+  const [showGate, setShowGate] = useState(false);
+  const [isUnlocked, setIsUnlocked] = useState(false);
+  const [pendingOpen, setPendingOpen] = useState(null);
+  const [userEmail, setUserEmail] = useState('');
+
+  useEffect(() => {
+    const saved = sessionStorage.getItem('faceless_views');
+    const unlocked = localStorage.getItem('faceless_unlocked');
+    const savedEmail = localStorage.getItem('faceless_email');
+    
+    if (saved) setViewCount(parseInt(saved));
+    if (unlocked === 'true') {
+      setIsUnlocked(true);
+      if (savedEmail) setUserEmail(savedEmail);
+    }
+  }, []);
+
+  const handleItemClick = (itemData, type) => {
+    if (isUnlocked) {
+      return { allowed: true };
+    }
+
+    const newCount = viewCount + 1;
+    setViewCount(newCount);
+    sessionStorage.setItem('faceless_views', newCount.toString());
+
+    if (newCount >= 3) {
+      setPendingOpen({ data: itemData, type });
+      setShowGate(true);
+      return { allowed: false };
+    }
+
+    return { allowed: true };
+  };
+
+  const handleUnlock = (email, phone) => {
+    // Save to localStorage for persistence across sessions
+    localStorage.setItem('faceless_unlocked', 'true');
+    localStorage.setItem('faceless_email', email);
+    localStorage.setItem('faceless_phone', phone);
+    localStorage.setItem('faceless_verified_at', new Date().toISOString());
+    
+    setIsUnlocked(true);
+    setUserEmail(email);
+
+    if (pendingOpen) {
+      setTimeout(() => {
+        window.dispatchEvent(new CustomEvent('faceless-open-pending', { 
+          detail: pendingOpen 
+        }));
+        setPendingOpen(null);
+      }, 600);
+    }
+  };
+
   return (
-    <div style={{ background: 'var(--card)', borderRadius: 'var(--anslation-ds-radius-xl)', overflow: 'hidden', border: '1px solid var(--border)', boxShadow: 'var(--anslation-ds-shadow-md)' }}>
-      {/* Hero */}
-      <div style={{ position: 'relative', height: '200px', background: 'linear-gradient(135deg, var(--anslation-ds-primary-soft) 0%, var(--muted) 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <span style={{ fontSize: '4rem' }}>🔥</span>
-        <div className="rp-viral-overlay" />
-        <div style={{ position: 'absolute', bottom: '1rem', left: '1rem', display: 'flex', gap: '0.5rem' }}>
-          <span className="rp-viral-badge">🔥 TRENDING</span>
-          <span className="badge chip">⏱ {item.readTime} read</span>
+    <div className="min-h-screen bg-[#fcfcfa] text-zinc-900 antialiased selection:bg-emerald-200 selection:text-emerald-900">
+      {!isUnlocked && viewCount > 0 && viewCount < 3 && (
+        <div className="fixed top-4 right-4 z-40 px-3 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-xs font-medium text-amber-700 flex items-center gap-2 shadow-lg shadow-amber-100/50 backdrop-blur-xl">
+          <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+          {3 - viewCount} FREE VIEW{3 - viewCount !== 1 ? 'S' : ''} LEFT
         </div>
-      </div>
+      )}
 
-      <div style={{ padding: '1.5rem' }}>
-        <h2 style={{ fontSize: 'clamp(1.125rem, 3vw, 1.5rem)', fontWeight: 750, color: 'var(--foreground)', lineHeight: 1.2, marginBottom: '0.75rem' }}>
-          {item.title}
-        </h2>
-
-        {/* Stats bar */}
-        <div className="rp-viral-stats-bar">
-          <span>👁 {item.views} views</span>
-          <span>❤️ {item.likes} likes</span>
+      {isUnlocked && (
+        <div className="fixed top-4 right-4 z-40 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-medium text-emerald-700 flex items-center gap-2 shadow-lg shadow-emerald-100/50 backdrop-blur-xl">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+          {userEmail ? userEmail.split('@')[0] : 'VERIFIED'} • UNLIMITED
         </div>
+      )}
 
-        <p style={{ fontSize: '0.9375rem', color: 'var(--muted-foreground)', lineHeight: 1.65, margin: '1rem 0' }}>
-          Discover something amazing that everyone is talking about. This piece has been shared thousands of times.
-        </p>
+      <Hero />
+      <TrendingMysteries onItemClick={handleItemClick} />
+      <FactsGrid onItemClick={handleItemClick} />
+      <ShortFormShowcase onItemClick={handleItemClick} />
+      <PsychologicalHooks />
+      <CommunityDiscussion />
+      <Footer />
 
-        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-          <a href={item.url} target="_blank" rel="noopener noreferrer"
-            className="btn btn-primary"
-            style={{ flex: 1, minWidth: '120px', minHeight: '48px', justifyContent: 'center', fontWeight: 700 }}>
-            Read Full Story →
-          </a>
-          <button className="btn btn-secondary" style={{ minHeight: '48px', padding: '0 1rem' }}>
-            🔗 Share
-          </button>
-        </div>
-      </div>
+      <EmailGate 
+        isOpen={showGate}
+        onClose={() => setShowGate(false)}
+        onUnlock={handleUnlock}
+        viewCount={viewCount}
+      />
     </div>
-  )
+  );
 }

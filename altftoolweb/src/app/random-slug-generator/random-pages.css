@@ -1,7 +1,107 @@
-/* ================================
-   Random Pages Module - Premium Vercel/Linear Style
-   All tokens from DS — no hardcoded colors
-================================ */
+
+.rp-root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.rp-nav {
+  width: 100%;
+  background: var(--background, #fff);
+  border-bottom: 1px solid var(--border, #e2e8f0);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.rp-nav-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.rp-page-body {
+  position: relative;
+  z-index: 1;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 6rem;
+}
+
+/* Category page layout - FULL WIDTH, no padding */
+.rp-page-body-full {
+  position: relative;
+  z-index: 1;
+  max-width: none !important;
+  width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Ensure category components take full width */
+.rp-page-body-full > * {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+}
+
+/* Keep navbar sticky and full width */
+.rp-nav {
+  width: 100%;
+  background: color-mix(in srgb, var(--background) 80%, transparent);
+  backdrop-filter: blur(12px) saturate(180%);
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+.rp-nav-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0.875rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* For home page grid - add container back only for home page content */
+.rp-home-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.rp-hero {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+.rp-cat-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* But make sure category components can take full width */
+.rp-page-body > div:not(.rp-home-container) {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
 
 /* ── Layout & Grid Background ── */
 .rp-root { 
@@ -10,6 +110,8 @@
   position: relative;
   overflow-x: hidden;
   font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+   width: 100%;
+  overflow-x: hidden;
 }
 
 /* Subtle grid background like Linear/Vercel */
@@ -38,6 +140,33 @@
   max-width: none;
   width: 100%;
   padding-top: 0;
+}
+
+/* Full width page container for category pages */
+.rp-page-full {
+  position: relative;
+  z-index: 1;
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 0; /* remove top/side padding to make full-bleed */
+}
+
+/* Allow preview content to span full width inside full container (full-bleed)
+   Uses negative margins to extend the element to viewport edges regardless of parent centering. */
+.rp-page-full .rp-preview-wrap {
+  max-width: none;
+  width: 100vw;
+  padding: 0;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  border-radius: 0;
+}
+
+/* Remove extra internal spacing from preview wrapper children */
+.rp-page-full .rp-preview-wrap > * {
+  margin: 0;
+  padding: 0;
 }
 
 /* ── Nav ── */

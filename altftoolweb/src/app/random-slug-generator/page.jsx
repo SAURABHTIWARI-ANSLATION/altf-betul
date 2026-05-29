@@ -1,6 +1,6 @@
-"use client"
-import React, { useState } from 'react'
+import Link from 'next/link'
 import './random-pages.css'
+<<<<<<< HEAD
 import { randomPagesConfig, CATEGORY_META } from './config'
 import { getRandomItem, getWeightedRandomCategory, safeRedirect } from './utils'
 import LoadingState from './components/ui/LoadingState'
@@ -82,151 +82,46 @@ export default function RandomPagesHub() {
   }
 
   const PreviewComponent = activeCat ? COMPONENT_MAP[activeCat] : null
+=======
+import { CATEGORIES } from './categories'
+>>>>>>> 5bf13dbe15b9382466a655860fb8afbb1fc770d2
 
+export default function RandomSlugHomePage() {
   return (
-    <div className="rp-root">
-      {loading && <LoadingState />}
+    <>
+      <section className="rp-hero">
+        <span className="rp-hero-badge">
+          <span className="rp-hero-badge-dot" /> Landing Hub
+        </span>
+        <h1 className="rp-hero-title">Random Pages Landing</h1>
+        <p className="rp-hero-sub">
+          Choose a category from the navbar and the selected page opens full in the main area.
+        </p>
+        <Link href="/random-slug-generator/viral" className="btn btn-primary rp-hero-cta">
+          Open Viral Page
+        </Link>
+      </section>
 
-      {/* ── Top Nav ── */}
-      <nav className="rp-nav">
-        <div className="rp-nav-inner">
-          <span className="rp-nav-brand">🎲 Random Pages</span>
-          <div className="rp-nav-pills">
-            {[['hub','Hub'],['preview','Preview'],['generator','Slug Engine']].map(([v,l]) => (
-              <button key={v} onClick={() => setView(v)}
-                className={`rp-nav-pill${view === v ? ' active' : ''}`}>
-                {l}
-              </button>
-            ))}
-          </div>
+      <section>
+        <div className="rp-section-head">
+          <h2 className="rp-section-title">Pick a category</h2>
         </div>
-      </nav>
-
-      <div className="rp-page-body">
-
-        {/* ══════════ HUB VIEW ══════════ */}
-        {view === 'hub' && (
-          <div>
-            {/* Hero */}
-            <section className="rp-hero">
-              <span className="rp-hero-badge">
-                <span className="rp-hero-badge-dot" /> Next-Gen Redirect Engine
-              </span>
-              <h1 className="rp-hero-title">
-                Discover <span className="rp-hero-accent">Random Rewards</span>
-              </h1>
-              <p className="rp-hero-sub">
-                Click any category to securely land on a random offer, quiz, deal, or viral page. No repetition, full surprise.
-              </p>
-              <button onClick={handleSurprise} className="btn btn-primary rp-hero-cta">
-                🎲 Surprise Me!
-              </button>
-            </section>
-
-            {/* Error */}
-            {error && <EmptyState message={error} onReset={() => setError(null)} />}
-
-            {/* Category Grid */}
-            {!error && (
-              <section style={{ marginBottom: '4rem' }}>
-                <div className="rp-section-head">
-                  <h2 className="rp-section-title">
-                    Explore Categories
-                    <span className="rp-count-badge">{CATEGORY_KEYS.length}</span>
-                  </h2>
-                </div>
-
-                <div className="rp-cat-grid">
-                  {CATEGORY_KEYS.map(key => {
-                    const meta = CATEGORY_META[key]
-                    return (
-                      <div key={key} className="rp-cat-card">
-                        <div className="rp-cat-icon">{meta.icon}</div>
-                        <div className="rp-cat-label">{meta.label}</div>
-                        <div className="rp-cat-actions">
-                          <button onClick={() => openPreview(key)} className="btn btn-secondary" style={{ flex: 1, justifyContent: 'center', minHeight: '40px', fontSize: '0.8125rem' }}>
-                            Preview
-                          </button>
-                          <button onClick={() => handleRedirect(key)} className="btn btn-primary" style={{ flex: 1, justifyContent: 'center', minHeight: '40px', fontSize: '0.8125rem' }}>
-                            Go →
-                          </button>
-                        </div>
-                      </div>
-                    )
-                  })}
-                </div>
-              </section>
-            )}
-
-            {/* CTA Banner */}
-            <section className="rp-cta-banner">
-              <div className="rp-cta-banner-glow" />
-              <h2 className="rp-cta-title">Feeling Adventurous?</h2>
-              <p className="rp-cta-sub">
-                Let our weighted algorithm select a destination from across all categories. You never know what you might find.
-              </p>
-              <button onClick={handleSurprise} className="rp-cta-btn">
-                Take Me Somewhere ⚡
-              </button>
-            </section>
-          </div>
-        )}
-
-        {/* ══════════ PREVIEW VIEW ══════════ */}
-        {view === 'preview' && (
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
-              <button onClick={() => setView('hub')} className="btn btn-secondary" style={{ minHeight: '40px' }}>← Back</button>
-              {CATEGORY_KEYS.map(k => (
-                <button key={k} onClick={() => openPreview(k)}
-                  className={`btn ${activeCat === k ? 'btn-primary' : 'btn-secondary'}`}
-                  style={{ minHeight: '40px', fontSize: '0.8125rem' }}>
-                  {CATEGORY_META[k].icon} {CATEGORY_META[k].label}
-                </button>
-              ))}
-            </div>
-
-            <div className="rp-preview-wrap">
-              {PreviewComponent && activeItem
-                ? <PreviewComponent item={activeItem} />
-                : <EmptyState message="Select a category above to preview it." />}
-            </div>
-          </div>
-        )}
-
-        {/* ══════════ SLUG GENERATOR VIEW ══════════ */}
-        {view === 'generator' && (
-          <div style={{ maxWidth: '560px', margin: '0 auto' }}>
-            <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-              <h1 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.25rem)', fontWeight: 750, color: 'var(--foreground)', marginBottom: '0.5rem' }}>Slug Engine</h1>
-              <p style={{ color: 'var(--muted-foreground)' }}>Generate random slugs for routes, demo data, or testing.</p>
-            </div>
-            <div className="section-wrapper">
-              <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 700, color: 'var(--foreground)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                Prefix (optional)
-              </label>
-              <input className="input" value={prefix}
-                onChange={e => setPrefix(e.target.value.replace(/\s+/g, '-').toLowerCase())}
-                placeholder="e.g. product, post, demo"
-                style={{ width: '100%', padding: '0.875rem 1rem', marginBottom: '1rem', fontSize: '1rem' }}
-              />
-              <div style={{ display: 'flex', gap: '0.625rem', marginBottom: '1.25rem', flexWrap: 'wrap' }}>
-                <button onClick={generateSlug} className="btn btn-primary" style={{ minHeight: '44px', flex: 1 }}>Generate</button>
-                <button onClick={() => { setSlug(''); setPrefix('') }} className="btn btn-secondary" style={{ minHeight: '44px' }}>Reset</button>
-                <button onClick={copySlug} disabled={!slug} className="btn btn-secondary" style={{ minHeight: '44px' }}>
-                  {copied ? '✓ Copied' : 'Copy'}
-                </button>
-              </div>
-              <div style={{ background: 'var(--muted)', borderRadius: 'var(--anslation-ds-radius)', padding: '1rem 1.25rem', borderLeft: '3px solid var(--primary)' }}>
-                <p style={{ fontSize: '0.6875rem', fontWeight: 700, color: 'var(--muted-foreground)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.5rem' }}>Output</p>
-                <pre style={{ fontFamily: 'var(--font-mono)', fontSize: '1.0625rem', fontWeight: 700, color: slug ? 'var(--foreground)' : 'var(--muted-foreground)', margin: 0, wordBreak: 'break-all' }}>
-                  {slug || '— not generated yet —'}
-                </pre>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
+        <div className="rp-cat-grid">
+          {CATEGORIES.map((item) => (
+            <Link
+              key={item.key}
+              href={`/random-slug-generator/${item.key}`}
+              className="rp-cat-card"
+              style={{ textAlign: 'left' }}>
+              <div style={{ fontSize: '1.75rem', marginBottom: '0.75rem' }}>{item.icon}</div>
+              <div style={{ fontWeight: 700, marginBottom: '0.5rem' }}>{item.label}</div>
+              <div style={{ color: 'var(--muted-foreground)', fontSize: '0.9rem' }}>{item.description}</div>
+            </Link>
+          ))}
+        </div>
+      </section>
+    </>
   )
 }
+
+
