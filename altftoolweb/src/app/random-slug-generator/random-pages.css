@@ -136,6 +136,11 @@
   margin: 0 auto;
   padding: 3rem 1.5rem 6rem;
 }
+.rp-page-body:has(.rp-coupon-page-head) {
+  max-width: none;
+  width: 100%;
+  padding-top: 0;
+}
 
 /* Full width page container for category pages */
 .rp-page-full {
@@ -286,8 +291,8 @@
 /* ── Category Grid ── */
 .rp-cat-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
+  gap: 1rem;
 }
 .rp-cat-card {
   position: relative;
@@ -465,44 +470,511 @@
   padding: 0.625rem 0;
 }
 
-/* ── Deals ── */
-.rp-deal-original-price { font-size: 0.875rem; color: var(--muted-foreground); text-decoration: line-through; }
-.rp-deal-sale-price { font-size: clamp(1.25rem, 4vw, 1.75rem); font-weight: 700; color: var(--foreground); line-height: 1.1; }
-.rp-deal-savings-badge {
-  background: color-mix(in srgb, var(--anslation-ds-success) 10%, transparent);
-  color: var(--anslation-ds-success);
-  border: 1px solid color-mix(in srgb, var(--anslation-ds-success) 30%, transparent);
-  border-radius: 4px;
-  padding: 0.125rem 0.5rem;
-  font-size: 0.75rem;
-  font-weight: 600;
+.rp-coupon-page-head {
+  position: relative;
+  min-height: min(620px, calc(100vh - 120px));
+  margin-bottom: 1.25rem;
+  width: calc(100vw - clamp(1.5rem, 6vw, 5rem));
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 0 0 18px 18px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  align-items: center;
+  gap: 1rem;
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  background: var(--foreground);
+  border: 1px solid var(--border);
+  box-shadow: 0 26px 72px -46px rgba(0,0,0,0.58);
 }
-.rp-deal-timer-box {
+.rp-coupon-page-head::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,0.82), rgba(0,0,0,0.48) 54%, rgba(0,0,0,0.2)),
+    linear-gradient(0deg, rgba(0,0,0,0.5), transparent 52%);
+}
+.rp-coupon-page-head > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.rp-coupon-page-head-content,
+.rp-coupon-banner-card {
+  position: relative;
+  z-index: 2;
+}
+.rp-coupon-page-head-content {
+  display: grid;
+  gap: 0.55rem;
+}
+.rp-coupon-page-head a {
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+.rp-coupon-page-head h1 {
+  color: #fff;
+  font-size: clamp(2.25rem, 5vw, 4.75rem);
+  line-height: 1.05;
+  max-width: 900px;
+}
+.rp-coupon-page-head-content p {
+  color: rgba(255,255,255,0.84);
+  font-size: clamp(1rem, 2vw, 1.18rem);
+  line-height: 1.6;
+  max-width: 680px;
+}
+.rp-coupon-banner-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+.rp-coupon-banner-actions a {
+  min-height: 46px;
+  border-radius: 10px;
+  padding: 0 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  color: var(--foreground);
+  border: 1px solid rgba(255,255,255,0.34);
+}
+.rp-coupon-banner-actions a:nth-child(2) {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+}
+.rp-coupon-page-head .rp-cashkaro-section-label {
+  color: color-mix(in srgb, var(--primary) 35%, #fff);
+}
+.rp-coupon-banner-card {
+  justify-self: end;
+  width: min(100%, 320px);
+  background: rgba(255,255,255,0.94);
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 14px;
+  padding: 1.25rem;
+  display: grid;
+  gap: 0.35rem;
+  box-shadow: 0 24px 60px -32px rgba(0,0,0,0.7);
+}
+.rp-coupon-banner-card span,
+.rp-coupon-banner-card small {
+  color: var(--muted-foreground);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+.rp-coupon-banner-card strong {
+  color: var(--foreground);
+  font-size: 1.65rem;
+  line-height: 1.08;
+}
+.rp-coupon-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin-bottom: 1.25rem;
+}
+.rp-coupon-feature-grid article {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  display: grid;
+  gap: 0.25rem;
+  box-shadow: 0 12px 26px -24px rgba(0,0,0,0.42);
+}
+.rp-coupon-feature-grid strong {
+  color: var(--foreground);
+  font-size: 1.45rem;
+  line-height: 1;
+}
+.rp-coupon-feature-grid span {
+  color: var(--muted-foreground);
+  font-size: 0.78rem;
+  font-weight: 750;
+}
+.rp-coupon-visual-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 0.85rem;
+}
+.rp-coupon-visual-card {
+  position: relative;
+  min-height: 310px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #111827;
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  box-shadow: 0 24px 70px -42px rgba(0,0,0,0.55);
+}
+.rp-coupon-visual-card--v2 {
+  background: #172554;
+}
+.rp-coupon-visual-card--v3 {
+  background: #312e81;
+}
+.rp-coupon-visual-card--v4 {
+  background: #3b0764;
+}
+.rp-coupon-visual-card > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.64;
+  mix-blend-mode: normal;
+}
+.rp-coupon-visual-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(3,7,24,0.96), rgba(15,23,42,0.76) 58%, rgba(0,0,0,0.38)),
+    linear-gradient(0deg, rgba(0,0,0,0.78), transparent 44%);
+}
+.rp-coupon-visual-card--v2 .rp-coupon-visual-overlay {
+  background:
+    linear-gradient(90deg, rgba(6,18,51,0.96), rgba(30,64,175,0.7) 58%, rgba(0,0,0,0.34)),
+    linear-gradient(0deg, rgba(0,0,0,0.78), transparent 44%);
+}
+.rp-coupon-visual-card--v3 .rp-coupon-visual-overlay {
+  background:
+    linear-gradient(90deg, rgba(49,46,129,0.96), rgba(124,58,237,0.68) 58%, rgba(0,0,0,0.34)),
+    linear-gradient(0deg, rgba(0,0,0,0.78), transparent 44%);
+}
+.rp-coupon-visual-card--v4 .rp-coupon-visual-overlay {
+  background:
+    linear-gradient(90deg, rgba(59,7,100,0.96), rgba(190,24,93,0.66) 58%, rgba(0,0,0,0.34)),
+    linear-gradient(0deg, rgba(0,0,0,0.78), transparent 44%);
+}
+.rp-coupon-brand-chip {
+  position: absolute;
+  z-index: 2;
+  top: 0.85rem;
+  left: 0.85rem;
+  min-width: 118px;
+  max-width: 150px;
+  background: rgba(255,255,255,0.94);
+  border: 1px solid rgba(255,255,255,0.75);
+  border-radius: 10px;
+  padding: 0.62rem 0.75rem;
+  display: grid;
+  gap: 0.18rem;
+  box-shadow: 0 18px 34px -26px rgba(0,0,0,0.45);
+}
+.rp-coupon-brand-chip strong {
+  color: var(--primary);
+  font-size: 0.9rem;
+  font-weight: 900;
+}
+.rp-coupon-brand-chip span {
+  color: var(--foreground);
+  font-size: 0.62rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+.rp-coupon-hot-badge {
+  position: absolute;
+  z-index: 2;
+  top: 0.5rem;
+  right: 0.75rem;
+  min-height: 50px;
+  min-width: 164px;
+  border-radius: 10px;
+  padding: 0 1rem;
+  display: inline-flex;
+  align-items: center;
+  background: #dc2626;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 900;
+  white-space: nowrap;
+  justify-content: center;
+  box-shadow: 0 14px 28px -22px rgba(0,0,0,0.42);
+}
+.rp-coupon-visual-content {
+  position: absolute;
+  z-index: 2;
+  left: clamp(1rem, 3vw, 1.6rem);
+  right: clamp(1rem, 3vw, 1.6rem);
+  top: 8.2rem;
+  bottom: 4.7rem;
+  display: grid;
+  gap: 0.44rem;
+  align-content: center;
+}
+.rp-coupon-visual-content > span {
+  color: rgba(255,255,255,0.78);
+  font-size: clamp(0.95rem, 1.65vw, 1.25rem);
+  font-weight: 850;
+}
+.rp-coupon-visual-content h2 {
+  color: #fff;
+  font-size: clamp(1.45rem, 2.2vw, 2.05rem);
+  line-height: 1.04;
+  max-width: 520px;
+  overflow-wrap: anywhere;
+}
+.rp-coupon-visual-content p {
+  color: rgba(255,255,255,0.82);
+  font-size: 1rem;
+  font-weight: 750;
+  max-width: 440px;
+}
+.rp-coupon-visual-card--v2 .rp-coupon-visual-content,
+.rp-coupon-visual-card--v4 .rp-coupon-visual-content {
+  left: clamp(1rem, 3vw, 1.6rem);
+  max-width: none;
+  text-align: left;
+  justify-items: start;
+}
+.rp-coupon-visual-card--v3 .rp-coupon-visual-content {
+  top: 8.2rem;
+  bottom: 4.7rem;
+}
+.rp-coupon-reward-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.52rem;
+  width: fit-content;
+  max-width: 100%;
+  background: rgba(255,255,255,0.2);
+  border-radius: 8px;
+  backdrop-filter: blur(8px);
+  padding: 0.32rem 0.58rem 0.32rem 0.32rem;
+}
+.rp-coupon-reward-row strong {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: var(--primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 950;
+}
+.rp-coupon-reward-row span {
+  color: #fff;
+  font-size: clamp(0.9rem, 1.45vw, 1.15rem);
+  font-weight: 900;
+  line-height: 1.15;
+}
+.rp-coupon-card-meta {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: color-mix(in srgb, var(--anslation-ds-danger) 5%, transparent);
-  border: 1px solid color-mix(in srgb, var(--anslation-ds-danger) 20%, transparent);
-  border-radius: 8px;
-  padding: 0.625rem 0.875rem;
-  font-size: 0.875rem;
-  color: var(--anslation-ds-danger);
-  font-weight: 500;
+  flex-wrap: wrap;
 }
-.rp-deal-trust-pill {
-  background: var(--background);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 0.125rem 0.5rem;
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--muted-foreground);
+.rp-coupon-card-meta span,
+.rp-coupon-card-meta code {
+  min-height: 27px;
+  border-radius: 999px;
+  padding: 0 0.65rem;
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.67rem;
+  font-weight: 850;
 }
-.rp-deal-product-image {
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: var(--background);
+.rp-coupon-card-meta span {
+  background: rgba(255,255,255,0.16);
+  color: rgba(255,255,255,0.88);
+}
+.rp-coupon-card-meta code {
+  background: rgba(255,255,255,0.14);
+  border: 1px dashed rgba(255,255,255,0.5);
+  color: #fff;
+  font-family: var(--font-mono);
+}
+.rp-coupon-apply-btn {
+  position: absolute;
+  z-index: 2;
+  right: 1rem;
+  bottom: 1rem;
+  min-height: 40px;
+  min-width: 132px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.96);
+  color: var(--primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-weight: 900;
+  font-size: 0.82rem;
+  padding: 0 1rem;
+}
+.rp-coupon-visual-card--v2 .rp-coupon-apply-btn,
+.rp-coupon-visual-card--v4 .rp-coupon-apply-btn {
+  left: auto;
+  right: 1rem;
+}
+.rp-coupon-visual-card--v3 .rp-coupon-apply-btn {
+  right: 1rem;
+  transform: none;
+}
+.rp-coupon-store-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.75rem;
+}
+.rp-coupon-store-strip article {
+  position: relative;
   overflow: hidden;
+  background:
+    radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--primary) 12%, transparent), transparent 38%),
+    var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.2rem;
+  display: grid;
+  gap: 0.45rem;
+  min-height: 132px;
+  box-shadow: 0 14px 30px -26px rgba(0,0,0,0.45);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.rp-coupon-store-strip article::before {
+  content: '';
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--primary) 12%, var(--background));
+  border: 1px dashed color-mix(in srgb, var(--primary) 34%, var(--border));
+}
+.rp-coupon-store-strip article:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--primary) 30%, var(--border));
+  box-shadow: 0 22px 44px -30px rgba(0,0,0,0.54);
+}
+.rp-coupon-store-strip strong {
+  position: relative;
+  color: var(--foreground);
+  font-size: 1.05rem;
+  font-weight: 900;
+}
+.rp-coupon-store-strip span {
+  position: relative;
+  color: var(--primary);
+  font-weight: 850;
+  font-size: 1rem;
+}
+.rp-coupon-store-strip small {
+  position: relative;
+  width: fit-content;
+  margin-top: auto;
+  color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 8%, var(--background));
+  border: 1px dashed color-mix(in srgb, var(--primary) 34%, var(--border));
+  border-radius: 999px;
+  padding: 0.35rem 0.65rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 850;
+}
+.rp-coupon-page-footer {
+  margin-top: 1.25rem;
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background:
+    linear-gradient(135deg, rgba(37,99,235,0.12), rgba(16,185,129,0.1)),
+    var(--card);
+  padding: clamp(1rem, 3vw, 1.5rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.9fr);
+  align-items: center;
+  gap: 1.25rem;
+}
+.rp-coupon-page-footer h2 {
+  color: var(--foreground);
+  font-size: clamp(1.45rem, 3vw, 2.15rem);
+  line-height: 1.16;
+  max-width: 720px;
+}
+.rp-coupon-footer-steps {
+  display: grid;
+  gap: 0.75rem;
+}
+.rp-coupon-footer-steps span {
+  min-height: 54px;
+  background: rgba(255,255,255,0.62);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--foreground);
+  font-weight: 850;
+}
+.rp-coupon-footer-steps strong {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: var(--primary);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 720px) {
+  .rp-coupon-visual-grid {
+    grid-template-columns: 1fr;
+  }
+  .rp-coupon-page-head {
+    grid-template-columns: 1fr;
+    width: 100%;
+    min-height: 540px;
+    border-radius: 16px;
+    align-items: end;
+  }
+  .rp-coupon-banner-card {
+    justify-self: start;
+  }
+  .rp-coupon-feature-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .rp-coupon-visual-card {
+    min-height: 330px;
+  }
+  .rp-coupon-visual-card--v2 .rp-coupon-visual-content,
+  .rp-coupon-visual-card--v4 .rp-coupon-visual-content {
+    left: 1rem;
+    right: 1rem;
+    max-width: none;
+    text-align: left;
+    justify-items: start;
+  }
+  .rp-coupon-visual-card--v3 .rp-coupon-visual-content {
+    top: 6.7rem;
+    bottom: 4.7rem;
+  }
+  .rp-coupon-visual-card--v2 .rp-coupon-apply-btn,
+  .rp-coupon-visual-card--v3 .rp-coupon-apply-btn,
+  .rp-coupon-visual-card--v4 .rp-coupon-apply-btn {
+    left: auto;
+    right: 1rem;
+    transform: none;
+  }
+  .rp-coupon-page-footer {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ── Soft Landing ── */
