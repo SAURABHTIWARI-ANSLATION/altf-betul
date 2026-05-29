@@ -103,6 +103,7 @@ const Header = () => {
     if (searchError) setSearchError("");
   };
 
+
   const handleSearch = (event) => {
     event?.preventDefault();
     const trimmed = searchQuery.trim();
