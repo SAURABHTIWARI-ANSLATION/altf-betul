@@ -48,6 +48,11 @@ export default function RandomPagesHub() {
   }
 
   function handleRedirect(catKey) {
+    if (catKey === 'deals') {
+      window.location.href = '/random-slug-generator/deals'
+      return
+    }
+
     setLoading(true)
     setError(null)
     setTimeout(() => {
