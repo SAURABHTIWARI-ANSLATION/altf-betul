@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import Header from "@/platform/navigation/Header";
-import Footer from "@/platform/navigation/Footer";
+import RouteFooter from "@/app/components/RouteFooter";
 import Script from "next/script";
 import { CookieConsentProvider } from "@/platform/consentalerts/CookieConsentContext";
 import { CookieBanner } from "@/platform/consentalerts/CookieBanner";
@@ -187,7 +187,7 @@ export default function RootLayout({ children }) {
         <Suspense fallback={null}>
           <LazyChatBot />
         </Suspense>
-        <Footer />
+        <RouteFooter />
 
       </AlertProvider>
     </CookieConsentProvider>

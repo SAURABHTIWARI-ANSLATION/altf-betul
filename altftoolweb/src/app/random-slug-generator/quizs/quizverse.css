@@ -1,0 +1,94 @@
+.qv-shell {
+  --font-fun: var(--font-geist-sans, "Sora", system-ui, sans-serif);
+  --font-body: var(--font-geist-sans, "Inter", system-ui, sans-serif);
+  min-height: 100vh;
+  background: #0b0912;
+  color: #fff;
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  position: relative;
+  isolation: isolate;
+}
+
+.qv-shell * {
+  box-sizing: border-box;
+}
+
+.qv-shell .font-fun {
+  font-family: var(--font-fun);
+}
+
+.qv-shell .perspective {
+  perspective: 1200px;
+}
+
+.qv-shell .preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.qv-shell .card-3d {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.qv-shell .gradient-text {
+  background: linear-gradient(90deg, #e7b08a, #c9a8e9, #7fd4c9, #e7b08a);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: qv-shimmer 9s linear infinite;
+}
+
+.qv-shell .glass {
+  background: rgba(255, 255, 255, 0.045);
+  backdrop-filter: blur(20px) saturate(120%);
+  -webkit-backdrop-filter: blur(20px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.qv-shell .tracking-tightest {
+  letter-spacing: 0;
+}
+
+.qv-shell .eyebrow {
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.qv-shell .confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  top: -20px;
+  z-index: 60;
+  border-radius: 2px;
+  animation: qv-confetti-fall linear forwards;
+}
+
+.qv-shell input {
+  color: #fff;
+}
+
+.qv-shell button,
+.qv-shell a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.qv-shell ::selection {
+  background: rgba(127, 212, 201, 0.32);
+}
+
+@keyframes qv-shimmer {
+  to {
+    background-position: 300% 0;
+  }
+}
+
+@keyframes qv-confetti-fall {
+  to {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0;
+  }
+}
