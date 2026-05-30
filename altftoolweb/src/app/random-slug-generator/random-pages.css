@@ -744,3 +744,38 @@
   @keyframes rp-bounceIn { from { opacity: 0; } to { opacity: 1; } }
   @keyframes rp-slideInRight { from { opacity: 0; } to { opacity: 1; } }
 }
+
+/* AltFTool Landing navbar color matching Maison Landing m-nav exactly */
+.rp-nav {
+  background: rgba(201, 169, 110, 0.92) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.rp-nav-brand {
+  color: #3c2a21 !important;
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-weight: 700 !important;
+  font-size: 1.35rem !important;
+  letter-spacing: 0.02em !important;
+}
+
+.rp-nav-pills {
+  background: rgba(0, 0, 0, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+.rp-nav-pill {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.rp-nav-pill:hover:not(.active) {
+  color: #1a1815 !important;
+}
+
+.rp-nav-pill.active {
+  background: #ffffff !important;
+  color: #1a1815 !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15) !important;
+}
