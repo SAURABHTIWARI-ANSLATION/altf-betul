@@ -1,6 +1,5 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import { randomPagesConfig } from '../../config'
 import { CASHKARO_STYLE_DEALS, COUPON_CODES, DEAL_SECTIONS, FEATURED_STORES } from './constants'
 import { useTimer } from './hooks/useTimer'
 import { dealClasses } from './styles'
@@ -251,8 +250,7 @@ export default function DealsPage({ item }) {
   const [email, setEmail] = useState('')
   const [pendingUrl, setPendingUrl] = useState('')
   const [storesReady, setStoresReady] = useState(false)
-  const configDeals = randomPagesConfig.deals.items.filter(deal => deal.active)
-  const deals = [...CASHKARO_STYLE_DEALS, ...configDeals]
+  const deals = CASHKARO_STYLE_DEALS.filter(deal => deal.active)
 
   useEffect(() => {
     setStoresReady(true)
