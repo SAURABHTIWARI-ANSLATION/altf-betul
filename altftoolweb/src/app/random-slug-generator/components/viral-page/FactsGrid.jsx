@@ -49,7 +49,7 @@ export default function FactsGrid({ onItemClick }) {
               <span className="text-xs tracking-[0.15em] text-zinc-600 uppercase font-bold">DISCOVERY FEED</span>
             </motion.div>
             
-            <h2 className="font-serif text-5xl md:text-6xl tracking-[-0.03em] text-zinc-900 leading-[1.1] mb-6">
+            <h2 className="font-serif text-5xl md:text-6xl tracking-[-0.03em] text-zinc-900 mb-6" style={{ lineHeight: 1.2 }}>
               FACTS THAT DON'T
               <br />
               <span className="text-zinc-300">FIT THE TIMELINE.</span>

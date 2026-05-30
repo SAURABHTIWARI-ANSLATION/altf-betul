@@ -100,7 +100,8 @@ export default function Hero() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="font-serif text-6xl md:text-8xl lg:text-[104px] leading-[1.05] tracking-[-0.03em] text-zinc-900 mb-8"
+            className="font-serif text-6xl md:text-8xl lg:text-[104px] tracking-[-0.03em] text-zinc-900 mb-8"
+            style={{ lineHeight: 1.2 }}
           >
             THE INTERNET'S
             <br />

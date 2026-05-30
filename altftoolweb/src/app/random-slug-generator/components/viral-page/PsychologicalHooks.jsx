@@ -42,7 +42,7 @@ export default function PsychologicalHooks() {
             <span className="text-xs tracking-[0.15em] text-violet-700 uppercase font-bold">PSYCHOLOGY OF VIRAL MYSTERY</span>
           </div>
           
-          <h2 className="font-serif text-5xl md:text-7xl tracking-[-0.03em] text-zinc-900 leading-[1.1] mb-6">
+          <h2 className="font-serif text-5xl md:text-7xl tracking-[-0.03em] text-zinc-900 mb-6" style={{ lineHeight: 1.2 }}>
             WHY YOU CAN'T
             <br />
             <span className="text-zinc-300">STOP SCROLLING.</span>
@@ -69,7 +69,7 @@ export default function PsychologicalHooks() {
                   </div>
                   
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-serif text-2xl md:text-3xl lg:text-[32px] leading-[1.1] tracking-[-0.02em] text-zinc-900 mb-3 font-medium">
+                    <h3 className="font-serif text-2xl md:text-3xl lg:text-[32px] tracking-[-0.02em] text-zinc-900 mb-3 font-medium" style={{ lineHeight: 1.2 }}>
                       {hook.headline}
                     </h3>
                     

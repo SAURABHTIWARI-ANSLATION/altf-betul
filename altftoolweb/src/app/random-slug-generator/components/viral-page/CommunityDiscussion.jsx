@@ -70,7 +70,7 @@ export default function CommunityDiscussion() {
                 <span className="text-xs tracking-widest text-emerald-700 uppercase font-bold">UNDERGROUND • NO FACES</span>
               </div>
               
-              <h2 className="font-serif text-5xl md:text-6xl tracking-[-0.03em] text-zinc-900 leading-[1.1] mb-6">
+              <h2 className="font-serif text-5xl md:text-6xl tracking-[-0.03em] text-zinc-900 mb-6" style={{ lineHeight: 1.2 }}>
                 THE COMMENT
                 <br />
                 <span className="text-zinc-300">SECTION IS</span>

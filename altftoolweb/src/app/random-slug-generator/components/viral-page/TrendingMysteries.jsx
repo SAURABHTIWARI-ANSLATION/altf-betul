@@ -107,7 +107,7 @@ export default function TrendingMysteries({ onItemClick }) {
                 <span className="w-1 h-1 rounded-full bg-emerald-500" />
               </motion.div>
               
-              <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl tracking-[-0.03em] text-zinc-900 leading-[1.1]">
+              <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl tracking-[-0.03em] text-zinc-900" style={{ lineHeight: 1.2 }}>
                 WHAT THEY'RE
                 <br />
                 <span className="text-zinc-400">WATCHING AT 3AM</span>

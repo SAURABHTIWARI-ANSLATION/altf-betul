@@ -43,7 +43,7 @@ export default function PsychologicalHooks() {
             <span className="text-xs tracking-[0.2em] text-violet-300 uppercase font-medium">PSYCHOLOGY OF VIRAL MYSTERY</span>
           </div>
           
-          <h2 className="font-serif text-5xl md:text-7xl tracking-[-0.03em] text-white leading-[1.1] mb-6">
+          <h2 className="font-serif text-5xl md:text-7xl tracking-[-0.03em] text-white mb-6" style={{ lineHeight: 1.2 }}>
             WHY YOU CAN'T
             <br />
             <span className="text-zinc-700">STOP SCROLLING.</span>
@@ -78,7 +78,8 @@ export default function PsychologicalHooks() {
                       whileInView={{ opacity: 1 }}
                       viewport={{ once: true }}
                       transition={{ delay: 0.3 + index * 0.1 }}
-                      className="font-serif text-2xl md:text-3xl lg:text-4xl leading-[1.1] tracking-[-0.02em] text-white mb-4"
+                      className="font-serif text-2xl md:text-3xl lg:text-4xl tracking-[-0.02em] text-white mb-4"
+                      style={{ lineHeight: 1.2 }}
                     >
                       {hook.headline}
                     </motion.h3>
