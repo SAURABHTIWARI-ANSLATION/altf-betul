@@ -16,8 +16,7 @@ const CATEGORY_IMAGE = {
   Love: "/random-slug-generator/quizs/images/love.jpg",
 };
 
-const quizImage = (quiz) =>
-  CATEGORY_IMAGE[quiz.category] || quiz.image || CATEGORY_IMAGE.Personality;
+const quizImage = (quiz) => quiz.image || CATEGORY_IMAGE[quiz.category] || CATEGORY_IMAGE.Personality;
 
 // has the user already given us their email in a previous session/quiz?
 function getSavedLead() {
@@ -30,18 +29,29 @@ function getSavedLead() {
 }
 
 export default function QuizPlayer({ quiz, onExit, onPick }) {
-  const saved = getSavedLead();
-  // The VERY FIRST quiz is free (no email). After the user has completed
-  // one quiz, EVERY further quiz requires an email to reveal the result —
-  // unless they've already given it (then it stays unlocked forever).
-  const gateRequired = !saved && completedCount() >= 1;
+  const [saved, setSaved] = useState(null);
+  const [hydrated, setHydrated] = useState(false);
+  const [completedQuizzes, setCompletedQuizzes] = useState(0);
+  const [unlocked, setUnlocked] = useState(true);
+  const [lead, setLead] = useState(null); // captured {name, email}
+
+  useEffect(() => {
+    const savedLead = getSavedLead();
+    const completed = completedCount();
+    const gateRequired = !savedLead && completed >= 1;
+    setSaved(savedLead);
+    setLead(savedLead);
+    setCompletedQuizzes(completed);
+    setUnlocked(!gateRequired);
+    setHydrated(true);
+  }, []);
+
+  const gateRequired = hydrated && !saved && completedQuizzes >= 1;
 
   const [step, setStep] = useState(0); // current question index
   const [answers, setAnswers] = useState([]); // selected per question
   const [selected, setSelected] = useState(null); // current selection (trivia feedback)
   const [finished, setFinished] = useState(false); // all questions answered
-  const [unlocked, setUnlocked] = useState(!gateRequired); // email gate passed / not needed
-  const [lead, setLead] = useState(saved); // captured {name, email}
 
   // live "people on this quiz right now" — fluctuates for FOMO
   const [livePlayers, setLivePlayers] = useState(quiz.playing || 120);
@@ -103,21 +113,21 @@ export default function QuizPlayer({ quiz, onExit, onPick }) {
     setSelected(null);
     setFinished(false);
     const stillSaved = getSavedLead();
-    // by now at least one quiz is completed, so require email unless we have it
-    setUnlocked(!!stillSaved);
+    const completed = completedCount();
+    setUnlocked(!!stillSaved || completed < 1);
     setLead(stillSaved);
   };
 
   const scoreMsg = (score) => {
     const pct = score / total;
-    if (pct === 1) return "Perfect score! You're a genius! 🏆";
-    if (pct >= 0.7) return "Awesome work! So close to perfect! 🌟";
-    if (pct >= 0.4) return "Not bad at all — keep going! 💪";
+    if (pct === 1) return "Perfect score! You're a genius! 🧠✨";
+    if (pct >= 0.7) return "Awesome work! So close to perfect! 🌟🤖";
+    if (pct >= 0.4) return "Not bad at all — keep going! 💪✨";
     return "Room to grow — try again! 🚀";
   };
 
-  const showResult = finished && unlocked;
-  const showGate = finished && !unlocked;
+  const showResult = finished && unlocked && hydrated;
+  const showGate = finished && !unlocked && hydrated;
 
   // record completion + detect a freshly-unlocked reward tier
   const [rewardJustUnlocked, setRewardJustUnlocked] = useState(null);
@@ -254,18 +264,16 @@ export default function QuizPlayer({ quiz, onExit, onPick }) {
             >
               {lead?.name && (
                 <p className="text-white/60 mb-2">
-                  Hey <span className="font-bold text-white">{lead.name}</span> 👋
+                  Hey <span className="font-bold text-white">{lead.name}</span>
                 </p>
               )}
 
               {result.kind === "personality" ? (
                 <>
                   <motion.div
-                    animate={{ scale: [1, 1.15, 1], rotate: [0, 5, -5, 0] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                    className="text-7xl mb-4"
+                    className="text-4xl mb-4 font-semibold text-white/80"
                   >
-                    {result.data.title.match(/\p{Emoji}/u)?.[0] || "🎉"}
+                    Result
                   </motion.div>
                   <p className="text-white/60 font-semibold mb-1">
                     Your result is...
@@ -273,7 +281,7 @@ export default function QuizPlayer({ quiz, onExit, onPick }) {
                   <h2
                     className={`font-fun text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r ${result.data.color} bg-clip-text text-transparent`}
                   >
-                    {result.data.title}
+                    {result.data.title.replace(/\p{Emoji}/gu, "").trim()}
                   </h2>
                   <p className="text-white/80 text-lg max-w-md mx-auto">
                     {result.data.text}
@@ -284,9 +292,9 @@ export default function QuizPlayer({ quiz, onExit, onPick }) {
                   <motion.div
                     animate={{ y: [0, -12, 0] }}
                     transition={{ duration: 1.6, repeat: Infinity }}
-                    className="text-7xl mb-4"
+                    className="text-2xl mb-4 font-semibold text-white/80"
                   >
-                    {result.score === total ? "🏆" : "🎯"}
+                    Score
                   </motion.div>
                   <p className="text-white/60 font-semibold mb-1">You scored</p>
                   <h2 className="font-fun text-5xl md:text-6xl font-bold mb-3">
@@ -301,7 +309,7 @@ export default function QuizPlayer({ quiz, onExit, onPick }) {
 
               {lead?.email ? (
                 <div className="mt-6 glass rounded-2xl py-3 px-4 text-sm text-white/70">
-                  📩 A copy of your result was sent to{" "}
+                  A copy of your result was sent to
                   <span className="text-cyan-300 font-semibold">
                     {lead.email}
                   </span>
@@ -309,7 +317,7 @@ export default function QuizPlayer({ quiz, onExit, onPick }) {
               ) : (
                 !quiz.free && (
                   <div className="mt-6 glass rounded-2xl py-3 px-4 text-sm text-white/70">
-                    ✨ Result unlocked!
+                    Result unlocked
                   </div>
                 )
               )}
@@ -337,7 +345,7 @@ export default function QuizPlayer({ quiz, onExit, onPick }) {
                   transition={{ delay: 0.3, type: "spring", stiffness: 160 }}
                   className="mt-7 rounded-2xl p-5 bg-gradient-to-br from-emerald-400/15 to-teal-500/10 border border-emerald-300/30"
                 >
-                  <p className="text-2xl mb-1">🎉🎁</p>
+                  <p className="text-2xl mb-1">Reward Unlocked</p>
                   <p className="font-fun font-semibold text-lg">
                     Reward unlocked: {rewardJustUnlocked.percent}% OFF
                   </p>

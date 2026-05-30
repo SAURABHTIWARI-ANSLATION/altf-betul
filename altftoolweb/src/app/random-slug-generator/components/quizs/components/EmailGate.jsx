@@ -72,13 +72,6 @@ export default function EmailGate({ quiz, onUnlock }) {
           </div>
         ) : (
           <>
-            <motion.div
-              animate={{ scale: [1, 1.1, 1] }}
-              transition={{ duration: 1.8, repeat: Infinity }}
-              className="text-5xl mb-3"
-            >
-              🔓
-            </motion.div>
             <h2 className="font-fun text-3xl font-bold mb-2">
               Your result is <span className="gradient-text">ready!</span>
             </h2>
@@ -134,7 +127,7 @@ export default function EmailGate({ quiz, onUnlock }) {
             </form>
 
             <div className="flex items-center justify-center gap-4 mt-5 text-[11px] text-white/40">
-              <span>🔒 Private & secure</span>
+              <span>Private & secure</span>
               <span>•</span>
               <span>2.4M+ results unlocked</span>
             </div>

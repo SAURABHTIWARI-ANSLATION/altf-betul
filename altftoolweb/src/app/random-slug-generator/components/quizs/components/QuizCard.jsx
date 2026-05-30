@@ -21,14 +21,20 @@ function hasEmail() {
 export default function QuizCard({ quiz, index, onStart }) {
   const ref = useRef(null);
   const [transform, setTransform] = useState("");
-  // prefer the quiz's own topic image, fall back to category image
-  const bgImage =
-    CATEGORY_IMAGE[quiz.category] || quiz.image || CATEGORY_IMAGE.Personality;
+  const [hydrated, setHydrated] = useState(false);
+  const [isFreePlay, setIsFreePlay] = useState(false);
+  const [requiresEmail, setRequiresEmail] = useState(false);
 
-  // Free play only applies to the user's very first quiz (when no email yet).
-  const emailKnown = hasEmail();
-  const isFreePlay = !emailKnown && completedCount() < 1;
-  const requiresEmail = !emailKnown && !isFreePlay;
+  // prefer the quiz's own topic image, fall back to category image
+  const bgImage = quiz.image || CATEGORY_IMAGE[quiz.category] || CATEGORY_IMAGE.Personality;
+
+  useEffect(() => {
+    const emailKnown = hasEmail();
+    const completed = completedCount();
+    setIsFreePlay(!emailKnown && completed < 1);
+    setRequiresEmail(!emailKnown && completed >= 1);
+    setHydrated(true);
+  }, []);
 
   // fluctuating live player count for FOMO
   const [playing, setPlaying] = useState(quiz.playing || 80);
@@ -79,12 +85,12 @@ export default function QuizCard({ quiz, index, onStart }) {
 
         {/* free / locked / badge ribbon */}
         <div className="absolute top-5 right-5 z-10 flex items-center gap-2">
-          {isFreePlay && (
+          {hydrated && isFreePlay && (
             <span className="text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-emerald-400/15 border border-emerald-300/30 text-emerald-200">
               Free
             </span>
           )}
-          {requiresEmail && (
+          {hydrated && requiresEmail && (
             <span className="text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/10 backdrop-blur border border-white/20 text-white/80 flex items-center gap-1">
               🔒 Unlock
             </span>

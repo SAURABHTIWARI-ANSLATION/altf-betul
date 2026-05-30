@@ -8,6 +8,30 @@
   overflow-x: hidden;
   position: relative;
   isolation: isolate;
+  padding-bottom: 0;
+  z-index: 0;
+}
+
+main.rp-page-body,
+main.rp-page-body-full,
+.rp-root,
+.qv-shell {
+  z-index: 0 !important;
+  position: static !important;
+  overflow: visible !important;
+}
+
+main.rp-page-body,
+main.rp-page-body-full {
+  padding-bottom: 3rem !important;
+}
+
+footer,
+body > footer,
+.app-footer,
+.route-footer {
+  position: relative !important;
+  z-index: 9999 !important;
 }
 
 .qv-shell * {

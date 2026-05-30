@@ -4,9 +4,7 @@ import Background from "./components/Background.jsx";
 import Home from "./components/Home.jsx";
 import QuizPlayer from "./components/QuizPlayer.jsx";
 import LiveActivity from "./components/LiveActivity.jsx";
-import Header from "./components/Header.jsx";
 import RewardsModal from "./components/RewardsModal.jsx";
-import Footer from "@/platform/navigation/Footer";
 
 export default function App() {
   const [activeQuiz, setActiveQuiz] = useState(null);
@@ -30,12 +28,6 @@ export default function App() {
     <div className="qv-shell min-h-screen">
       <Background />
       <LiveActivity />
-
-      <Header
-        onHome={goHome}
-        onBrowse={browse}
-        onOpenRewards={() => setRewardsOpen(true)}
-      />
 
       <RewardsModal
         open={rewardsOpen}
@@ -72,7 +64,6 @@ export default function App() {
           )}
         </AnimatePresence>
       </div>
-      <Footer />
     </div>
   );
 }
