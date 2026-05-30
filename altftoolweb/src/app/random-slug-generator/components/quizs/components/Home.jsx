@@ -224,7 +224,7 @@ export default function Home({ onStart, onOpenRewards }) {
                 onClick={onOpenRewards}
                 className="px-7 py-3.5 rounded-full font-medium glass border border-white/15 hover:bg-white/10 transition"
               >
-                View my rewards 🎁
+                View my rewards
               </button>
             </div>
           </div>

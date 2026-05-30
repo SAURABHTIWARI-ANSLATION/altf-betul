@@ -120,10 +120,10 @@ export default function QuizPlayer({ quiz, onExit, onPick }) {
 
   const scoreMsg = (score) => {
     const pct = score / total;
-    if (pct === 1) return "Perfect score! You're a genius! 🧠✨";
-    if (pct >= 0.7) return "Awesome work! So close to perfect! 🌟🤖";
-    if (pct >= 0.4) return "Not bad at all — keep going! 💪✨";
-    return "Room to grow — try again! 🚀";
+    if (pct === 1) return "Perfect score! You're a genius!";
+    if (pct >= 0.7) return "Awesome work! So close to perfect!";
+    if (pct >= 0.4) return "Not bad at all — keep going!";
+    return "Room to grow — try again!";
   };
 
   const showResult = finished && unlocked && hydrated;
@@ -156,8 +156,7 @@ export default function QuizPlayer({ quiz, onExit, onPick }) {
           ← All Quizzes
         </button>
         <span className="font-fun font-semibold flex items-center gap-2">
-          <span className="text-2xl">{quiz.emoji}</span>
-          <span className="hidden sm:inline">{quiz.title}</span>
+          <span>{quiz.title}</span>
         </span>
       </div>
 
@@ -390,11 +389,6 @@ export default function QuizPlayer({ quiz, onExit, onPick }) {
                           <div className="absolute inset-0 bg-gradient-to-t from-[#0b0912] via-[#0b0912]/80 to-[#0b0912]/30" />
 
                           <div className="relative z-10">
-                            <div
-                              className={`inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br ${q.color} text-base mb-2`}
-                            >
-                              {q.emoji}
-                            </div>
                             <p className="font-fun text-sm font-semibold leading-snug mb-1 drop-shadow">
                               {q.title}
                             </p>

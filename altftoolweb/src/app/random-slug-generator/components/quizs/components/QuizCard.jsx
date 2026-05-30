@@ -92,7 +92,7 @@ export default function QuizCard({ quiz, index, onStart }) {
           )}
           {hydrated && requiresEmail && (
             <span className="text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/10 backdrop-blur border border-white/20 text-white/80 flex items-center gap-1">
-              🔒 Unlock
+              Unlock
             </span>
           )}
           {quiz.badge && (
@@ -108,12 +108,6 @@ export default function QuizCard({ quiz, index, onStart }) {
         />
 
         <div className="relative z-10" style={{ transform: "translateZ(36px)" }}>
-          <div
-            className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br ${quiz.color} text-2xl shadow-lg mb-5 opacity-95`}
-          >
-            {quiz.emoji}
-          </div>
-
           <span className="block text-[11px] font-medium uppercase tracking-wider text-white/55 mb-2">
             {quiz.category} · {quiz.questions.length} questions
           </span>

@@ -15,8 +15,8 @@ export default function EmailGate({ quiz, onUnlock }) {
 
   const submit = (e) => {
     e.preventDefault();
-    if (!name.trim()) return setError("Please enter your name 🙂");
-    if (!valid(email)) return setError("Please enter a valid email address 📧");
+    if (!name.trim()) return setError("Please enter your name");
+    if (!valid(email)) return setError("Please enter a valid email address");
     if (!agree) return setError("Please accept to see your results.");
     setError("");
     setLoading(true);
@@ -66,8 +66,8 @@ export default function EmailGate({ quiz, onUnlock }) {
               className="w-14 h-14 mx-auto rounded-full border-4 border-white/20 border-t-cyan-400 mb-5"
             />
             <p className="font-fun text-xl">Analyzing your answers…</p>
-            <p className="text-white/50 text-sm mt-1">
-              Calculating your unique result ✨
+            <p className="text-white/55 text-sm mt-1">
+              Calculating your unique result
             </p>
           </div>
         ) : (
@@ -81,7 +81,7 @@ export default function EmailGate({ quiz, onUnlock }) {
               forever.
             </p>
             <p className="text-xs text-amber-300/90 mb-6 font-semibold">
-              ⏳ Your free quiz is done — unlock everything now!
+              Your free quiz is done — unlock everything now!
             </p>
 
             <form onSubmit={submit} className="space-y-3 text-left">
@@ -122,7 +122,7 @@ export default function EmailGate({ quiz, onUnlock }) {
                 type="submit"
                 className={`w-full py-4 rounded-2xl font-fun font-bold text-lg bg-gradient-to-r ${quiz.color} shadow-xl`}
               >
-                ✨ Reveal My Result
+                Reveal My Result
               </motion.button>
             </form>
 

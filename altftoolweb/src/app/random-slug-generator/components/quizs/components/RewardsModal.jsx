@@ -62,7 +62,6 @@ export default function RewardsModal({ open, onClose, onBrowse }) {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0b0912] via-[#0b0912]/40 to-transparent" />
               <div className="absolute inset-0 flex flex-col items-center justify-end pb-3 text-center">
-                <div className="text-3xl mb-1">🎁</div>
                 <h2 className="font-fun text-2xl font-semibold tracking-tightest">
                   Your Rewards
                 </h2>
@@ -136,7 +135,7 @@ export default function RewardsModal({ open, onClose, onBrowse }) {
                         {copied === t.code ? "Copied!" : t.code}
                       </button>
                     ) : (
-                      <span className="shrink-0 text-white/40 text-lg">🔒</span>
+                      <span className="shrink-0 text-white/40 text-xs font-semibold uppercase tracking-wider">Locked</span>
                     )}
                   </div>
                 );

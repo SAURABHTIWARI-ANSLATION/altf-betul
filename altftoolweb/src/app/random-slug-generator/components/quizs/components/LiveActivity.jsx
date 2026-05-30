@@ -44,13 +44,8 @@ export default function LiveActivity() {
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: -60, scale: 0.9 }}
             transition={{ type: "spring", stiffness: 200, damping: 20 }}
-            className="glass rounded-2xl pl-3 pr-4 py-3 flex items-center gap-3 shadow-2xl border border-white/15"
+            className="glass rounded-2xl px-4 py-3 flex items-center gap-3 shadow-2xl border border-white/15"
           >
-            <div
-              className={`w-11 h-11 shrink-0 rounded-xl bg-gradient-to-br ${toast.quiz.color} flex items-center justify-center text-xl`}
-            >
-              {toast.quiz.emoji}
-            </div>
             <div className="text-sm leading-tight">
               <p className="text-white">
                 <span className="font-bold">{toast.name}</span>
