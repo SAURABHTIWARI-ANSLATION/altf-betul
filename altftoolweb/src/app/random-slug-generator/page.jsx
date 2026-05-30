@@ -4,7 +4,7 @@ import { CATEGORIES } from './categories'
 
 export default function RandomSlugHomePage() {
   return (
-    <>
+    <> 
       <section className="rp-hero">
         <span className="rp-hero-badge">
           <span className="rp-hero-badge-dot" /> Landing Hub
