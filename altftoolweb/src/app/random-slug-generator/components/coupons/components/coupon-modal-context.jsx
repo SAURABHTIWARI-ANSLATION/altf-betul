@@ -177,21 +177,32 @@ export function CouponModalProvider({ children }) {
               {/* Brand header */}
               <div className="flex items-center gap-3 pb-4 border-b border-dashed border-[#E2E8F0]">
                 <div className="bg-[#F8FAFC] border border-neutral-200 w-12 h-12 rounded-xl flex items-center justify-center shadow-sm overflow-hidden p-1.5 shrink-0">
-                  {renderBrandLogo(couponData.brand) ? renderBrandLogo(couponData.brand) :
-                    couponData.logo && couponData.logo.startsWith('http') ? (
-                      <>
-                        <img src={couponData.logo} alt={couponData.brand} className="w-full h-full object-contain"
-                          onError={(e) => { e.target.style.display = 'none'; if (e.target.nextSibling) e.target.nextSibling.style.display = 'flex'; }} />
-                        <div className="hidden w-full h-full items-center justify-center bg-neutral-100 text-neutral-700 text-xs font-bold rounded-lg">
-                          {couponData.brand?.charAt(0) || 'C'}
-                        </div>
-                      </>
-                    ) : (
+                  {(() => {
+                    // normalize logo to a string if it's an imported module or object
+                    const logoSrc = couponData && (typeof couponData.logo === 'string'
+                      ? couponData.logo
+                      : couponData.logo && (couponData.logo.src || couponData.logo.default || String(couponData.logo)) || '');
+
+                    if (renderBrandLogo(couponData.brand)) return renderBrandLogo(couponData.brand);
+
+                    if (logoSrc) {
+                      return (
+                        <>
+                          <img src={logoSrc} alt={couponData.brand} className="w-full h-full object-contain"
+                            onError={(e) => { e.target.style.display = 'none'; if (e.target.nextSibling) e.target.nextSibling.style.display = 'flex'; }} />
+                          <div className="hidden w-full h-full items-center justify-center bg-neutral-100 text-neutral-700 text-xs font-bold rounded-lg">
+                            {couponData.brand?.charAt(0) || 'C'}
+                          </div>
+                        </>
+                      );
+                    }
+
+                    return (
                       <div className={`w-full h-full flex items-center justify-center rounded-lg text-white font-extrabold text-sm ${couponData.logoBg || 'bg-[#e75a3e]'}`}>
                         {couponData.brand?.charAt(0) || 'C'}
                       </div>
-                    )
-                  }
+                    );
+                  })()}
                 </div>
                 <div>
                   <span className="text-[10px] font-black text-neutral-400 block tracking-wider leading-none uppercase">{couponData.brand}</span>
@@ -260,11 +271,10 @@ export function CouponModalProvider({ children }) {
                     </div>
                     <button
                       onClick={handleCopy}
-                      className={`w-full py-2.5 rounded-xl text-xs font-black transition-all duration-300 flex items-center justify-center gap-2 ${
-                        copied
+                      className={`w-full py-2.5 rounded-xl text-xs font-black transition-all duration-300 flex items-center justify-center gap-2 ${copied
                           ? 'bg-emerald-500 text-white scale-95'
                           : 'bg-[#1a1a1a] hover:bg-[#e75a3e] text-white'
-                      }`}
+                        }`}
                     >
                       {copied ? (
                         <>
