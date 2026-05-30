@@ -28,7 +28,8 @@ export default function RandomSlugHomePage() {
               key={item.key}
               href={`/random-slug-generator/${item.key}`}
               className="rp-cat-card"
-              style={{ textAlign: 'left' }}>
+              style={{ textAlign: 'left' }}
+            >
               <div style={{ fontSize: '1.75rem', marginBottom: '0.75rem' }}>{item.icon}</div>
               <div style={{ fontWeight: 700, marginBottom: '0.5rem' }}>{item.label}</div>
               <div style={{ color: 'var(--muted-foreground)', fontSize: '0.9rem' }}>{item.description}</div>
@@ -39,5 +40,3 @@ export default function RandomSlugHomePage() {
     </>
   )
 }
-
-
