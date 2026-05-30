@@ -90,7 +90,7 @@ export default function TrendingMysteries({ onItemClick }) {
 
   return (
     <>
-      <section className="relative py-24 bg-[#f9fafb] border-y border-zinc-200/50">
+      <section className="relative py-24 bg-zinc-50 border-y border-zinc-200">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(16,185,129,0.04),transparent_60%)]" />
         
         <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
@@ -107,7 +107,7 @@ export default function TrendingMysteries({ onItemClick }) {
                 <span className="w-1 h-1 rounded-full bg-emerald-500" />
               </motion.div>
               
-              <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl tracking-[-0.03em] text-zinc-900 leading-[0.9]">
+              <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl tracking-[-0.03em] text-zinc-900 leading-[1.1]">
                 WHAT THEY'RE
                 <br />
                 <span className="text-zinc-400">WATCHING AT 3AM</span>
@@ -127,7 +127,7 @@ export default function TrendingMysteries({ onItemClick }) {
               </div>
             </div>
           </div>
-
+ 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
             {mysteries.map((item, index) => (
               <motion.article
@@ -155,43 +155,43 @@ export default function TrendingMysteries({ onItemClick }) {
                       <span className="px-3 py-1.5 rounded-full bg-red-600 text-white text-xs font-bold tracking-wide shadow-lg">
                         {item.badge}
                       </span>
-                      <span className="px-2.5 py-1 rounded-lg bg-white/90 backdrop-blur-md border border-zinc-200 text-xs text-zinc-700 font-mono flex items-center gap-1.5 shadow-sm">
+                      <span className="px-2.5 py-1 rounded-lg bg-white/90 backdrop-blur-md border border-zinc-200 text-xs text-zinc-800 font-mono flex items-center gap-1.5 shadow-sm">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                         {formatViews(item.watchingNow)}
                       </span>
                     </div>
-
+ 
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                       <div className="w-14 h-14 rounded-full bg-white shadow-xl border border-zinc-200 flex items-center justify-center group-hover:scale-110 transition-transform">
                         <div className="w-0 h-0 border-l-[14px] border-l-zinc-900 border-y-[9px] border-y-transparent ml-1" />
                       </div>
                     </div>
-
+ 
                     <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
-                      <span className="px-2.5 py-1 rounded-lg bg-white/90 backdrop-blur-md border border-zinc-200 text-[10px] text-zinc-600 font-mono shadow-sm">
+                      <span className="px-2.5 py-1 rounded-lg bg-white/90 backdrop-blur-md border border-zinc-200 text-[10px] text-zinc-700 font-mono shadow-sm">
                         {item.time}
                       </span>
-                      <span className="flex items-center gap-1 px-2 py-1 rounded-lg bg-emerald-50 border border-emerald-200 text-[10px] text-emerald-700 font-semibold">
+                      <span className="flex items-center gap-1 px-2 py-1 rounded-lg bg-emerald-50 border border-emerald-200 text-[10px] text-emerald-800 font-semibold">
                         <Users className="w-3 h-3" />
                         LIVE
                       </span>
                     </div>
                   </div>
-
+ 
                   <div className="p-5 bg-white">
-                    <h3 className="font-serif text-[19px] leading-tight text-zinc-900 mb-2 group-hover:text-emerald-700 transition-colors font-medium">
+                    <h3 className="font-serif text-[19px] leading-tight text-zinc-950 mb-2 group-hover:text-emerald-700 transition-colors font-semibold">
                       {item.title}
                     </h3>
-                    <p className="text-xs text-zinc-500 leading-relaxed mb-4 font-medium">
+                    <p className="text-xs text-zinc-600 leading-relaxed mb-4 font-semibold">
                       {item.subtitle}
                     </p>
-
+ 
                     <div className="flex items-center justify-between pt-3 border-t border-zinc-100">
-                      <span className="flex items-center gap-1.5 text-xs text-zinc-600 font-medium">
+                      <span className="flex items-center gap-1.5 text-xs text-zinc-700 font-semibold">
                         <Eye className="w-3.5 h-3.5" />
                         {formatViews(item.views)}
                       </span>
-                      <span className="flex items-center gap-1 text-xs text-emerald-600 font-semibold">
+                      <span className="flex items-center gap-1 text-xs text-emerald-700 font-bold">
                         <Zap className="w-3 h-3 fill-current" />
                         OPEN →
                       </span>

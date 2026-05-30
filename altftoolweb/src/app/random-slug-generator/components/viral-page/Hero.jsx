@@ -100,7 +100,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="font-serif text-6xl md:text-8xl lg:text-[104px] leading-[0.85] tracking-[-0.03em] text-zinc-900 mb-8"
+            className="font-serif text-6xl md:text-8xl lg:text-[104px] leading-[1.05] tracking-[-0.03em] text-zinc-900 mb-8"
           >
             THE INTERNET'S
             <br />
@@ -133,12 +133,12 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.9 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
+            className="flex flex-col md:flex-row items-center justify-center gap-6 mb-16 flex-wrap px-4"
           >
             <motion.button 
               whileHover={{ scale: 1.02, boxShadow: '0 20px 40px -12px rgba(16, 185, 129, 0.25)' }}
               whileTap={{ scale: 0.98 }}
-              className="group relative px-9 py-4 bg-zinc-900 text-white rounded-2xl font-semibold tracking-wide shadow-xl shadow-zinc-900/20 hover:bg-zinc-800 transition-all"
+              className="group relative px-9 py-4 bg-zinc-900 text-white rounded-2xl font-semibold tracking-wide shadow-xl shadow-zinc-900/20 hover:bg-zinc-800 transition-all whitespace-nowrap"
             >
               <span className="relative z-10 flex items-center gap-3">
                 <Play className="w-4 h-4 fill-current" />
@@ -146,7 +146,7 @@ export default function Hero() {
                 <span className="ml-2 px-2.5 py-1 rounded-lg text-[10px] bg-emerald-500 text-white font-bold tracking-wide">347 LIVE</span>
               </span>
             </motion.button>
-            <button className="px-9 py-4 bg-white border border-zinc-200 rounded-2xl font-semibold text-zinc-700 tracking-wide hover:border-zinc-300 hover:bg-zinc-50 transition-all flex items-center gap-3 shadow-sm">
+            <button className="px-9 py-4 bg-white border border-zinc-200 rounded-2xl font-semibold text-zinc-700 tracking-wide hover:border-zinc-300 hover:bg-zinc-50 transition-all flex items-center gap-3 shadow-sm whitespace-nowrap">
               <Volume2 className="w-4 h-4 text-emerald-600" />
               LISTEN IN LIGHT MODE
               <span className="text-xs text-zinc-500">• 12K online</span>

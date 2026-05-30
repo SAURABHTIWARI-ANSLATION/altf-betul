@@ -70,7 +70,7 @@ export default function CommunityDiscussion() {
                 <span className="text-xs tracking-widest text-emerald-700 uppercase font-bold">UNDERGROUND • NO FACES</span>
               </div>
               
-              <h2 className="font-serif text-5xl md:text-6xl tracking-[-0.03em] text-zinc-900 leading-[0.9] mb-6">
+              <h2 className="font-serif text-5xl md:text-6xl tracking-[-0.03em] text-zinc-900 leading-[1.1] mb-6">
                 THE COMMENT
                 <br />
                 <span className="text-zinc-300">SECTION IS</span>
@@ -82,7 +82,7 @@ export default function CommunityDiscussion() {
                 No usernames. No profiles. Just anonymous investigators sharing findings at 3AM. 
                 <span className="text-zinc-900"> This is where the mystery unfolds.</span>
               </p>
-
+ 
               <div className="space-y-3 p-5 rounded-2xl bg-white border border-zinc-200 shadow-sm">
                 {[
                   { label: 'Investigators online', value: activeInvestigators.toLocaleString(), live: true },
@@ -92,13 +92,13 @@ export default function CommunityDiscussion() {
                   <div key={i} className="flex items-center justify-between py-2 border-b border-zinc-100 last:border-0">
                     <span className="text-sm text-zinc-600 font-medium">{stat.label}</span>
                     <div className="flex items-center gap-2">
-                      <span className="font-mono text-zinc-900 font-semibold">{stat.value}</span>
+                       <span className="font-mono text-zinc-900 font-semibold">{stat.value}</span>
                       {stat.live && <span className="w-2 h-2 rounded-full bg-emerald-500" />}
                     </div>
                   </div>
                 ))}
               </div>
-
+ 
               <div className="mt-6 p-4 rounded-2xl bg-amber-50 border border-amber-200">
                 <div className="flex gap-3">
                   <Clock className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
@@ -111,7 +111,7 @@ export default function CommunityDiscussion() {
               </div>
             </motion.div>
           </div>
-
+ 
           <div className="lg:col-span-3 space-y-4">
             {threads.map((thread, index) => (
               <motion.div
@@ -123,13 +123,6 @@ export default function CommunityDiscussion() {
                 whileHover={{ x: 4 }}
                 className="group relative bg-white rounded-2xl border border-zinc-200 p-5 hover:border-emerald-300 hover:shadow-lg hover:shadow-emerald-100/50 transition-all cursor-pointer"
               >
-                {thread.live && (
-                  <div className="absolute top-5 right-5 flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                    <span className="text-xs tracking-wide text-red-600 font-bold">LIVE</span>
-                  </div>
-                )}
-
                 <div className="flex gap-4">
                   <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-zinc-100 border border-zinc-200 flex items-center justify-center text-lg text-zinc-600 font-mono group-hover:border-emerald-300 group-hover:bg-emerald-50 group-hover:text-emerald-700 transition-all">
                     {thread.avatar}
@@ -143,6 +136,12 @@ export default function CommunityDiscussion() {
                       <span className="px-2 py-0.5 rounded-md text-[10px] font-bold tracking-wide bg-violet-50 text-violet-700 border border-violet-200">
                         {thread.topic}
                       </span>
+                      {thread.live && (
+                        <span className="inline-flex items-center gap-1 bg-red-50 border border-red-200 px-2 py-0.5 rounded-md text-[10px] text-red-600 font-bold tracking-wide">
+                          <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+                          LIVE
+                        </span>
+                      )}
                     </div>
 
                     <p className="text-sm text-zinc-700 leading-relaxed font-medium mb-3">

@@ -49,7 +49,7 @@ export default function FactsGrid({ onItemClick }) {
               <span className="text-xs tracking-[0.15em] text-zinc-600 uppercase font-bold">DISCOVERY FEED</span>
             </motion.div>
             
-            <h2 className="font-serif text-5xl md:text-6xl tracking-[-0.03em] text-zinc-900 leading-[0.9] mb-6">
+            <h2 className="font-serif text-5xl md:text-6xl tracking-[-0.03em] text-zinc-900 leading-[1.1] mb-6">
               FACTS THAT DON'T
               <br />
               <span className="text-zinc-300">FIT THE TIMELINE.</span>
@@ -89,26 +89,26 @@ export default function FactsGrid({ onItemClick }) {
                   <div className="p-5">
                     <div className="flex flex-wrap gap-1.5 mb-3">
                       {fact.tags.map(tag => (
-                        <span key={tag} className="text-[10px] tracking-wide px-2 py-1 rounded-md bg-zinc-100 border border-zinc-200 text-zinc-600 font-semibold">
+                        <span key={tag} className="text-[10px] tracking-wide px-2 py-1 rounded-md bg-zinc-100 border border-zinc-300 text-zinc-800 font-semibold">
                           {tag}
                         </span>
                       ))}
                     </div>
 
-                    <h3 className="font-serif text-[18px] text-zinc-900 leading-tight mb-2.5 font-medium group-hover:text-emerald-700 transition-colors">
+                    <h3 className="font-serif text-[18px] text-zinc-950 leading-tight mb-2.5 font-semibold group-hover:text-emerald-700 transition-colors">
                       {fact.title}
                     </h3>
                     
-                    <p className="text-sm text-zinc-600 leading-relaxed font-medium line-clamp-3">
+                    <p className="text-sm text-zinc-700 leading-relaxed font-medium line-clamp-3">
                       {fact.body}
                     </p>
 
                     <div className="mt-4 pt-3 border-t border-zinc-100 flex items-center justify-between">
-                      <span className="text-xs text-zinc-500 flex items-center gap-1.5 font-medium">
-                        <Eye className="w-3 h-3" />
+                      <span className="text-xs text-zinc-600 flex items-center gap-1.5 font-semibold">
+                        <Eye className="w-3.5 h-3.5" />
                         {formatViews(fact.views)}
                       </span>
-                      <span className="text-xs text-emerald-600 font-bold">
+                      <span className="text-xs text-emerald-700 font-bold">
                         OPEN →
                       </span>
                     </div>

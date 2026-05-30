@@ -62,7 +62,7 @@ export default function ShortFormShowcase({ onItemClick }) {
                 <span className="text-xs text-zinc-500 tracking-wide font-medium">VERTICAL • NO FACES</span>
               </div>
               
-              <h2 className="font-serif text-5xl md:text-6xl tracking-[-0.03em] text-zinc-900 leading-[0.9]">
+              <h2 className="font-serif text-5xl md:text-6xl tracking-[-0.03em] text-zinc-900 leading-[1.1]">
                 SCROLL. WATCH.
                 <br />
                 <span className="text-zinc-300">CAN'T LOOK AWAY.</span>
